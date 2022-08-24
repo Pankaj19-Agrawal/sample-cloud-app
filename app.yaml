@@ -1,0 +1,19 @@
+runtime: nodejs16
+api_version: 1
+threadsafe: true
+handlers:
+- url: /
+  static_files: dist/sample-cloud-app/index.html
+  upload: dist/sample-cloud-app/index.html
+- url: /
+  static_dir: dist/sample-cloud-app
+  skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - coverage
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
