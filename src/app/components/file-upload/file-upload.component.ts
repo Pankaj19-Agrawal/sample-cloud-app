@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageConstant } from 'src/app/constants/message.constants';
 import { FileUploadService } from './file-upload.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { FileUploadService } from './file-upload.service';
 	styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
-
+	uploadButton:string = MessageConstant.UPLOAD_BUTTON;
 	// Variable to store shortLink from api response
 	shortLink: string = "";
 	loading: boolean = false; // Flag variable

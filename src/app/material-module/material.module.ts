@@ -76,6 +76,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
     ],
     exports: [
+        FlexLayoutModule,
         MatButtonModule,
         MatToolbarModule,
         MatIconModule,
