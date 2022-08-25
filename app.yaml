@@ -7,12 +7,3 @@ handlers:
   upload: dist/sample-cloud-app/index.html
 - url: /
   static_dir: dist/sample-cloud-app
-  skip_files:
-  - node_modules/
-  - src/
-  - coverage
-  - ^(.*/)?\..*$
-  - ^(.*/)?.*\.json$
-  - ^(.*/)?.*\.md$
-  - ^(.*/)?.*\.yaml$
-  - ^LICENSE
