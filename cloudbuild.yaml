@@ -16,9 +16,9 @@ steps:
     args: ['run', 'build', '--prod'] 
 
 #deploy to google cloud app engine
-  # - name: 'gcr.io/cloud-builders/gcloud'
-  #   args: ['app', 'deploy', '--version=prod']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--verbosity=demo']
 
-  - name: node:16.10
-    entrypoint: npm
-    args: ['app', 'deploy', '--version=prod']       
+  # - name: node:16.10
+  #   entrypoint: npm
+  #   args: ['app', 'deploy', '--version=prod']       
