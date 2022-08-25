@@ -1,9 +1,14 @@
 runtime: python27
 api_version: 1
-threadsafe: true
+threadsafe: yes
+
 handlers:
 - url: /
   static_files: dist/sample-cloud-app/index.html
   upload: dist/sample-cloud-app/index.html
 - url: /
   static_dir: dist/sample-cloud-app
+
+skip_files:
+- node_modules/
+- src/  
