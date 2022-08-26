@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, Input, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { MessageConstant } from 'src/app/constants/message.constants';
+import { CommonService } from 'src/app/services/common.service';
 
 export interface UserData {
-  key: string;
+  category: string;
   value: string;
 }
 
@@ -14,21 +15,28 @@ export interface UserData {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements AfterViewInit  {
+export class TableComponent implements AfterViewInit, OnInit  {
+  @Input() tableData:any;
   document:boolean = false;
   toggleButton:string = MessageConstant.TOGGLE_BUTTON_ONE;
-  displayedColumns: string[] = ['key', 'value'];
+  displayedColumns: string[] = ['category', 'value'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private commonService: CommonService) {
     // Create 100 users
-    const data = [{key:'mobile',value:'iPhone'},{key:'car',value:'honda'}] 
+    // const data = [{key:'mobile',value:'iPhone'},{key:'car',value:'honda'}] 
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(data);
+    // this.dataSource = new MatTableDataSource(data);
+  }
+
+  ngOnInit(): void {
+    console.log('table.component.ts 2',this.tableData);
+    // const data = [{key:'mobile',value:'iPhone'},{key:'car',value:'honda'}] 
+    this.dataSource = new MatTableDataSource(this.tableData);
   }
 
   ngAfterViewInit() {
@@ -47,14 +55,28 @@ export class TableComponent implements AfterViewInit  {
 
   toggle(){
     this.document = !this.document
-    if(this.document) 
+    if(this.document){
       this.toggleButton = MessageConstant.TOGGLE_BUTTON_TWO
-    else
+      this.abc();
+    } 
+    else{
       this.toggleButton = MessageConstant.TOGGLE_BUTTON_ONE
+    }
   }
 
   downloadDocument(){
 
   }
+
+  abc(){
+    let doc:any = document.getElementById('#mydoc') as HTMLInputElement;
+    let content = this.commonService.getFileContent();
+    doc.innerHTML = content; 
+    
+    let contentJson = this.tableData;
+    contentJson.forEach((item:any)=>{
+      doc.innerHTML = doc.innerHTML.replace(item.value,`<span style="background:yellow">${item.value}</span>`)
+    })
+  } 
 
 }

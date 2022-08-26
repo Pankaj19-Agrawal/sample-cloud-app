@@ -1,6 +1,6 @@
 <div class="text-center">
 	<input class="form-control" type="file" (change)="onChange($event)">
-	<button mat-raised-button color="primary" (click)="onUpload()">{{uploadButton}}</button>
+	<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 </div>
 
 <!-- Shareable short link of uoloaded file -->
@@ -12,5 +12,8 @@
 
 <!--Flag variable is used here-->
 <div class="container" *ngIf="loading"> 
-	<h3>Loading ...</h3>
+	<!-- <h3>Loading ...</h3> -->
 </div>
+
+
+<!-- <div id="output"></div> -->

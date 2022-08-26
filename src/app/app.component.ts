@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sample-cloud-app';
+  tableData:any;
+
+  dataForTable(data:any){
+    console.log('app.component.ts', data);
+    this.tableData = data;
+  }
 }

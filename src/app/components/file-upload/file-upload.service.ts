@@ -26,4 +26,10 @@ upload(file:any):Observable<any> {
 	// with formData as req
 	return this.http.post(this.baseApiUrl, formData)
 }
+
+	abc(url:string){
+		this.http.get(url).subscribe(data => {
+			console.log('data from file', data);
+		})
+	}
 }
