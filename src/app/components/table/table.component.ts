@@ -65,8 +65,36 @@ export class TableComponent implements AfterViewInit, OnInit  {
   }
 
   downloadDocument(){
+    let doc:any = document.getElementById('#mydoc') as HTMLInputElement;
+    // console.log('downloadDocument',doc);
+    let res = doc?.innerHTML;
 
+    // const blob = new Blob([res], { type: 'text/csv' });
+    // let allowedMimeType = ['application/pdf','application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    
+    // const blob = new Blob([res], { type: 'application/msword' });
+    // const url = window.URL.createObjectURL(blob);
+    // window.open(url);
+
+      var blob = new Blob([res], { type: 'application/msword' });
+      var url = window.URL.createObjectURL(blob);
+      var anchor = document.createElement("a");
+      anchor.download = "myfile";
+      anchor.href = url;
+      anchor.click();
   }
+
+  // DownloadFile(fileId): void {
+  //   this.requestService.DownloadVerifyFile(this.id,fileId).subscribe(response => {
+  //     const a = document.createElement('a')
+  //     const objectUrl = URL.createObjectURL(response)
+  //     a.href = objectUrl
+  //     a.download = response;
+  //     a.click();
+  //     URL.revokeObjectURL(objectUrl);
+  //   });
+  // }
+
 
   abc(){
     let doc:any = document.getElementById('#mydoc') as HTMLInputElement;
