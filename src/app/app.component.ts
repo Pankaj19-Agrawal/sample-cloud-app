@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IfileContentJson } from 'src/app/models/fileContentJson.model';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sample-cloud-app';
-  tableData:any;
+  tableData: IfileContentJson[];
 
-  dataForTable(data:any){
-    console.log('app.component.ts', data);
-    this.tableData = data;
+  dataForTable(event: any) {
+    this.tableData = event;
   }
 }

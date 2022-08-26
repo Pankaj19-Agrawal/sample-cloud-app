@@ -1,21 +1,8 @@
-<div class="text-center">
-	<input class="form-control" type="file" (change)="onChange($event)">
+<div fxLayout="row">
+	<div fxFlex>
+		<input class="form-control" type="file" (change)="onChange($event)">
+		<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
+	</div>
 	<!-- accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
 	<!-- accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
-	<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 </div>
-
-<!-- Shareable short link of uoloaded file -->
-<div class="container text-center jumbotron"
-	*ngIf="shortLink">
-	<h2> Visit Here</h2>
-	<a href="{{shortLink}}">{{shortLink}}</a>
-</div>
-
-<!--Flag variable is used here-->
-<div class="container" *ngIf="loading"> 
-	<!-- <h3>Loading ...</h3> -->
-</div>
-
-
-<!-- <div id="output"></div> -->

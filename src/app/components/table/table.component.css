@@ -1,22 +1,21 @@
-table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
+.data-table {
+  width: 100%;
+}
 
-  .toggle-button{
-    text-align: right;
-  }
+.input-container {
+  font-size: 14px;
+  width: 100%;
+}
 
-  span{background: red;}
+.data-table td,
+.data-table th {
+  width: 25%;
+}
 
-  @media print {
-    body {-webkit-print-color-adjust: exact;}
-    }
+.toggle-button {
+  text-align: right;
+}
+
+.content-div {
+  margin-top: 1em;
+}
