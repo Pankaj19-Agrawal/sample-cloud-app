@@ -1,3 +1,7 @@
 .file-card{
     margin-bottom: 1em;
 }
+
+@media print {
+    body {-webkit-print-color-adjust: exact;}
+    }

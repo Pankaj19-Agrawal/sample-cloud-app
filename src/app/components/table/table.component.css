@@ -17,4 +17,6 @@ table {
 
   span{background: red;}
 
-  
+  @media print {
+    body {-webkit-print-color-adjust: exact;}
+    }

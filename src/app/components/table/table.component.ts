@@ -65,23 +65,24 @@ export class TableComponent implements AfterViewInit, OnInit  {
   }
 
   downloadDocument(){
-    let doc:any = document.getElementById('#mydoc') as HTMLInputElement;
+    // let doc:any = document.getElementById('mydoc') as HTMLInputElement;
+    this.Export2Word()
     // console.log('downloadDocument',doc);
-    let res = doc?.innerHTML;
+    // let res = doc?.innerHTML;
 
-    // const blob = new Blob([res], { type: 'text/csv' });
-    // let allowedMimeType = ['application/pdf','application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    // // const blob = new Blob([res], { type: 'text/csv' });
+    // // let allowedMimeType = ['application/pdf','application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     
-    // const blob = new Blob([res], { type: 'application/msword' });
-    // const url = window.URL.createObjectURL(blob);
-    // window.open(url);
+    // // const blob = new Blob([res], { type: 'application/msword' });
+    // // const url = window.URL.createObjectURL(blob);
+    // // window.open(url);
 
-      var blob = new Blob([res], { type: 'application/msword' });
-      var url = window.URL.createObjectURL(blob);
-      var anchor = document.createElement("a");
-      anchor.download = "myfile";
-      anchor.href = url;
-      anchor.click();
+    //   var blob = new Blob([res], { type: 'application/msword' });
+    //   var url = window.URL.createObjectURL(blob);
+    //   var anchor = document.createElement("a");
+    //   anchor.download = "myfile";
+    //   anchor.href = url;
+    //   anchor.click(); 
   }
 
   // DownloadFile(fileId): void {
@@ -97,7 +98,7 @@ export class TableComponent implements AfterViewInit, OnInit  {
 
 
   abc(){
-    let doc:any = document.getElementById('#mydoc') as HTMLInputElement;
+    let doc:any = document.getElementById('mydoc') as HTMLInputElement;
     let content = this.commonService.getFileContent();
     doc.innerHTML = content; 
     
@@ -107,4 +108,72 @@ export class TableComponent implements AfterViewInit, OnInit  {
     })
   } 
 
+  Export2Word(filename = ''){
+    var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+    var postHtml = "</body></html>";
+    var doc1:any = document.getElementById("mydoc") as HTMLInputElement 
+    var html = preHtml + doc1.innerHTML + postHtml;
+
+    var blob = new Blob(['\ufeff', html], {
+        type: 'application/msword'
+    });
+    
+    // Specify link url
+    var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+    
+    // Specify file name
+    filename = filename?filename+'.doc':'document.doc';
+    
+    // Create download link element
+    var downloadLink = document.createElement("a");
+
+    document.body.appendChild(downloadLink);
+    
+    const nav = (window.navigator as any);
+    if(nav.msSaveOrOpenBlob ){
+        nav.msSaveOrOpenBlob(blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = url;
+        
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+    
+    document.body.removeChild(downloadLink);
 }
+
+}
+
+// npm install file-saver --save
+// npm install @types/file-saver --save
+
+
+// import {saveAs} from 'file-saver';
+
+// this.http.get('endpoint/', {responseType: "blob", headers: {'Accept': 'application/pdf'}})
+//   .subscribe(blob => {
+//     saveAs(blob, 'download.pdf');
+//   })
+
+
+
+
+// var plainText = "This is some test text.\n\nThis is the second line\n\n...third line";
+// var rtf = convertToRtf(plainText);
+// var plainText2 = convertToPlain(rtf);
+
+// function convertToRtf(plain) {
+//     plain = plain.replace(/\n/g, "\\par\n");
+//     return "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang2057{\\fonttbl{\\f0\\fnil\\fcharset0 Microsoft Sans Serif;}}\n\\viewkind4\\uc1\\pard\\f0\\fs17 " + plain + "\\par\n}";
+// }
+
+// function convertToPlain(rtf) {
+//     rtf = rtf.replace(/\\par[d]?/g, "");
+//     return rtf.replace(/\{\*?\\[^{}]+}|[{}]|\\\n?[A-Za-z]+\n?(?:-?\d+)?[ ]?/g, "").trim();
+// }
+
+// console.log(rtf)
