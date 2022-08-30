@@ -23,7 +23,7 @@ export class FileUploadComponent {
 
 	onChange(event: any) {
 		this.file = event.target;
-		// this.selectedFiles = event.target.files;
+		// this.selectedFiles = event.target.files; 
 	}
 
 	onUpload() {
