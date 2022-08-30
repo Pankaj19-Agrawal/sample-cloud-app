@@ -11,7 +11,7 @@ import { TableComponent } from './components/table/table.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { environment } from '../environments/environment';
+import { configuration } from '../environments/firebase';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
     AppRoutingModule,
     HttpClientModule,
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(configuration.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
