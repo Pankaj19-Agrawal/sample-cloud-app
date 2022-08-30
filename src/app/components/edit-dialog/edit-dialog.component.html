@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+    <mat-form-field class="width-100">
+        <mat-label>Category</mat-label>
+        <input matInput [(ngModel)]="category">
+    </mat-form-field>
+</div>
+<div fxLayout="row">
+    <div fxFlex class="dialog-buttons">
+        <button mat-raised-button (click)="onNoClick()">{{dialogButton.cancel}}</button>
+        <button mat-raised-button color="primary" class="update-button" [mat-dialog-close]="category"
+            cdkFocusInitial>{{dialogButton.ok}}</button>
+    </div>
+</div>

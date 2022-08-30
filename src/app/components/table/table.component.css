@@ -12,7 +12,7 @@
   width: 25%;
 }
 
-.toggle-button {
+.toggle-button, .edit-icon {
   text-align: right;
 }
 

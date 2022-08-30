@@ -34,6 +34,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule( {
@@ -72,7 +73,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatSnackBarModule,
         MatTableModule,
         MatSortModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        FormsModule
 
     ],
     exports: [
@@ -93,7 +95,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatTooltipModule,
         MatTableModule,
         MatPaginatorModule,
-        MatCardModule
+        MatCardModule,
+        MatDialogModule,
+        FormsModule
     ],
     providers: [
         MatDatepickerModule,

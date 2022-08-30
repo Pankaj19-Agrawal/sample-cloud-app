@@ -2,11 +2,14 @@ import { AfterViewInit, Component, ViewChild, Input, OnInit } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+
 import { MessageConstant } from 'src/app/constants/message.constants';
 import { CommonService } from 'src/app/services/common.service';
 import { iHeader } from 'src/app/models/tableHeader.model';
 import { IfileContentJson } from 'src/app/models/fileContentJson.model';
 import { FileUploadService } from '../file-upload/file-upload.service';
+import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -25,10 +28,15 @@ export class TableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private commonService: CommonService, private fileUploadService: FileUploadService) { }
+  constructor(
+    private commonService: CommonService, 
+    private fileUploadService: FileUploadService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
+    // this.showPlainDocument();
   }
 
   ngAfterViewInit() {
@@ -49,7 +57,7 @@ export class TableComponent implements AfterViewInit, OnInit {
       this.showPlainDocument();
     }
     else {
-      this.toggleButton = MessageConstant.TOGGLE_BUTTON_ONE
+      this.toggleButton = MessageConstant.TOGGLE_BUTTON_ONE;
     }
   }
 
@@ -63,12 +71,25 @@ export class TableComponent implements AfterViewInit, OnInit {
   showHighlightedDocument(doc: any) {
     let contentJson = this.tableData;
     contentJson.forEach((item: IfileContentJson) => {
-      doc.innerHTML = doc.innerHTML.replace(item.value, `<span style="background:yellow">${item.value}</span>`)
+      doc.innerHTML = doc.innerHTML.replace(item.value, `<span style="background:yellow" id="{{item.category}}">${item.value}</span>`)
     });
   }
 
   downloadFile() {
     this.fileUploadService.exportFile();
+  }
+
+  openDialog(row:IfileContentJson){
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: MessageConstant.DIALOG_WIDTH,
+      data: row,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);
+      row.category = result;
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
 }

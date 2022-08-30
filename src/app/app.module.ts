@@ -8,17 +8,27 @@ import { AppComponent } from './app.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { TableComponent } from './components/table/table.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadComponent,
-    TableComponent
+    TableComponent,
+    EditDialogComponent
   ],
   imports: [
     AngularMaterialModule,
-    BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
