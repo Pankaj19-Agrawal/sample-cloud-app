@@ -1,17 +1,23 @@
-<div fxLayout="row">
-	<div fxFlex>
-		<input class="form-control" type="file" (change)="onChange($event)">
-		<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
+<mat-card class="file-card">
+	<div fxLayout="row">
+		<div fxFlex>
+			<input class="form-control" type="file" (change)="onChange($event)">
+			<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
+		</div>
+		<!-- [disabled]="!file" -->
+		<!-- accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
+		<!-- accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
 	</div>
-	<!-- [disabled]="!file" -->
-	<!-- accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
-	<!-- accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
-</div>
+</mat-card>
 
-<!-- <div id="output"></div> -->
+<mat-card *ngIf="tableData">
+	<div fxLayout="row">
+		<div fxFlex>
+			<app-table [tableData]="tableData" *ngIf="tableData"></app-table>
+		</div>
+	</div>
+</mat-card>
 
-<textarea cols="50" rows="10"></textarea>
-<button mat-raised-button color="primary" (click)="getTextareaValue()">get texarea value</button>
+<textarea cols="50" rows="10" hidden>a</textarea>
 
-<pre id="mytext">aa
-</pre>
+<pre id="pre-element"></pre>
