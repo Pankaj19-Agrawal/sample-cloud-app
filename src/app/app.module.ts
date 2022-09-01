@@ -13,13 +13,15 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { configuration } from '../environments/firebase';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { DisplayDocumentComponent } from './components/display-document/display-document.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileUploadComponent,
     TableComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    DisplayDocumentComponent
   ],
   imports: [
     AngularMaterialModule,
