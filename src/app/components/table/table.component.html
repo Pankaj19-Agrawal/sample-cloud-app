@@ -1,14 +1,14 @@
 <div fxLayout="row">
-  <div fxFlex="85">
+  <div fxFlex>
     <mat-form-field class="input-container" *ngIf="!document">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
     <button mat-raised-button color="primary" *ngIf="document" (click)="downloadFile()">{{downloadButton}}</button>
   </div>
-  <div fxFlex="15" class="toggle-button">
+  <!-- <div fxFlex="15" class="toggle-button">
     <button mat-raised-button color="primary" (click)="toggle()">{{toggleButton}}</button>
-  </div>
+  </div> -->
 </div>
 
 <div fxLayout="row">

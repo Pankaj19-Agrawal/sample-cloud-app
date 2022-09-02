@@ -37,12 +37,16 @@ export class FileUploadComponent {
 	setTableData() {
 		this.tableData = [
 			{
-				category: 'Automobile',
-				value: 'a usually four-wheeled vehicle designed primarily for passenger transportation'
+				category: 'test 1',
+				value: 'The standard Lorem Ipsum passage, used since the 1500s'
 			},
 			{
-				category: 'Computer-Science',
-				value: 'Unlike electrical and computer engineers, computer scientists deal mostly with software and software systems'
+				category: 'test 2',
+				value: 'Hampden-Sydney College in Virginia'
+			},
+			{
+				category: 'test 3',
+				value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
 			}
 		];
 	}
@@ -84,12 +88,16 @@ export class FileUploadComponent {
 	convertPlainTextToHighlightedText(preElement: any) {
 		let contentJson = [
 			{
-				category: 'Automobile',
-				value: 'a usually four-wheeled vehicle designed primarily for passenger transportation'
+				category: 'test 1',
+				value: 'The standard Lorem Ipsum passage, used since the 1500s'
 			},
 			{
-				category: 'Computer-Science',
-				value: 'Unlike electrical and computer engineers, computer scientists deal mostly with software and software systems'
+				category: 'test 2',
+				value: 'Hampden-Sydney College in Virginia'
+			},
+			{
+				category: 'test 3',
+				value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
 			}
 		];
 		contentJson.forEach((item: IfileContentJson) => {
