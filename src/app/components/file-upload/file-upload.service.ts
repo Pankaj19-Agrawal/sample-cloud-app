@@ -90,4 +90,9 @@ export class FileUploadService {
 		const storageRef = this.storage.ref(this.basePath);
 		storageRef.child(name).delete();
 	}
+
+	getFile(){
+		const url = 'https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2Fstring.txt?alt=media&token=669040bf-06bf-45c5-b12a-ca42e9f80dc5'
+		return this.http.get(url, {responseType: "text"});
+	}
 }

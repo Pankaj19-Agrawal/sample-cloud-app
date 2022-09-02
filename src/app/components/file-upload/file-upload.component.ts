@@ -25,15 +25,17 @@ export class FileUploadComponent {
 
 	//on file change
 	onChange(event: any) {
-		this.file = event.target;  
-		this.loadPlainFile();
+		// this.file = event.target;  
+		// this.loadPlainFile();
+		this.selectedFiles = event.target.files;
+		this.getFile();
 	}
 
 	//on file upload
-	onUpload() {
-		this.setTableData();
-		this.getPlainFileContent();
-	}
+	// onUpload() {
+	// 	this.setTableData();
+	// 	this.getPlainFileContent();
+	// }
 
 	//pass data to table component
 	setTableData() {
@@ -114,19 +116,30 @@ export class FileUploadComponent {
 		this.fileUploadService.exportFile(preElement);
 	}
 	
+	//to upload file in gcp bucket
+	onUpload() {
+		const file = this.selectedFiles.item(0);
+		this.selectedFiles = undefined;
+		this.currentFileUpload = new FileUpload(file);
+		this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+			(percentage: any) => {
+				this.percentage = Math.round(percentage);
+			},
+			error => {
+				console.log(error);
+			}
+		);
+	}
 
-	// onUpload() {
-	// 	const file = this.selectedFiles.item(0);
-	// 	this.selectedFiles = undefined;
-	// 	this.currentFileUpload = new FileUpload(file);
-	// 	this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-	// 		(percentage: any) => {
-	// 			this.percentage = Math.round(percentage);
-	// 		},
-	// 		error => {
-	// 			console.log(error);
-	// 		}
-	// 	);
-	// }
+	getFile(){
+		this.fileUploadService.getFile().subscribe((data:any)=>{
+
+			console.log('data',data);
+		});
+	}
 
 }
+
+
+// string.txt
+// https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2Fstring.txt?alt=media&token=669040bf-06bf-45c5-b12a-ca42e9f80dc5
