@@ -20,4 +20,14 @@
 
 <textarea cols="50" rows="10" hidden>a</textarea>
 
-<pre id="pre-element"></pre>
+
+<div fxLayout="row" class="mt-1 p-1" [ngClass]="{'PreElementCss':isPreElementCss}">
+	<div fxFlex class="text-right">
+		<button mat-raised-button color="primary" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
+	</div>
+</div>
+<div fxLayout="row" [ngClass]="{'PreElementCss':isPreElementCss}">
+	<div fxFlex class="scrolling-enable">
+		<pre id="pre-element"></pre>
+	</div>
+</div>

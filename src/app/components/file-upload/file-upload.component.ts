@@ -18,6 +18,8 @@ export class FileUploadComponent {
 	selectedFiles: any;
 	currentFileUpload: FileUpload;
 	percentage: number;
+	isPreElementCss:boolean = false;
+	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
 
 	constructor(private fileUploadService: FileUploadService, private commonService: CommonService) { }
 
@@ -81,6 +83,7 @@ export class FileUploadComponent {
 	setPreElementContent(content:any){
 		let preElement = document.getElementById('pre-element') as HTMLInputElement;
 	    preElement.innerHTML = content;
+		this.isPreElementCss = true;
 		this.convertPlainTextToHighlightedText(preElement);
 	}
 
@@ -105,6 +108,11 @@ export class FileUploadComponent {
 		});
 	}
 
+	//file download
+	downloadFile() {
+		let preElement = document.getElementById('pre-element') as HTMLInputElement;
+		this.fileUploadService.exportFile(preElement);
+	}
 	
 
 	// onUpload() {

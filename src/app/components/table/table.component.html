@@ -1,19 +1,15 @@
 <div fxLayout="row">
   <div fxFlex>
-    <mat-form-field class="input-container" *ngIf="!document">
+    <mat-form-field class="input-container">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
-    <button mat-raised-button color="primary" *ngIf="document" (click)="downloadFile()">{{downloadButton}}</button>
   </div>
-  <!-- <div fxFlex="15" class="toggle-button">
-    <button mat-raised-button color="primary" (click)="toggle()">{{toggleButton}}</button>
-  </div> -->
 </div>
 
 <div fxLayout="row">
   <div fxFlex>
-    <div class="mat-elevation-z8" *ngIf="!document">
+    <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort class="data-table">
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header1}}</b> </th>
@@ -38,63 +34,9 @@
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
-        <!-- <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-          </tr> -->
+
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
   </div>
 </div>
-
-<div fxLayout="row">
-  <div fxFlex>
-    <div [hidden]="!document">
-      <mat-card style="margin-top: 1em;">
-        <div id="mydoc" class="content-div"></div>
-      </mat-card>
-    </div>
-  </div>
-</div>
-
-<!-- <div fxLayout="row">
-  <div fxFlex>
-    1.automobile, byname auto, also called motorcar or car, <span id="Automobile">a usually four-wheeled vehicle designed primarily for passenger transportation</span> and commonly propelled by an internal-combustion engine using a volatile fuel. 
-
-
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>
-<br>
-<br>
-<br>
-<br>
-some text 
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>  
-<br>
-2.Computer Science is the study of computers and computational systems. 
-<span id="Computer-Science">Unlike electrical and computer engineers, computer scientists deal mostly with software and software systems</span>; this includes their theory, design, development, and application  
-</div>
-</div> -->

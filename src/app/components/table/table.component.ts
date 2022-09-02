@@ -5,10 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MessageConstant } from 'src/app/constants/message.constants';
-import { CommonService } from 'src/app/services/common.service';
 import { iHeader } from 'src/app/models/tableHeader.model';
 import { IfileContentJson } from 'src/app/models/fileContentJson.model';
-import { FileUploadService } from '../file-upload/file-upload.service';
 import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.component';
 
 @Component({
@@ -18,9 +16,6 @@ import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.
 })
 export class TableComponent implements AfterViewInit, OnInit {
   @Input() tableData: IfileContentJson[];
-  document: boolean = false;
-  toggleButton: string = MessageConstant.TOGGLE_BUTTON_ONE;
-  downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
   tableHeader: iHeader = MessageConstant.TABLE_HEADER;
   displayedColumns: string[] = MessageConstant.JSON_PROPERTIES;
   dataSource: MatTableDataSource<IfileContentJson>;
@@ -29,14 +24,11 @@ export class TableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private commonService: CommonService, 
-    private fileUploadService: FileUploadService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
-    // this.showPlainDocument();
   }
 
   ngAfterViewInit() {
@@ -50,35 +42,6 @@ export class TableComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) this.dataSource.paginator.firstPage();
   }
 
-  toggle() {
-    this.document = !this.document
-    if (this.document) {
-      this.toggleButton = MessageConstant.TOGGLE_BUTTON_TWO
-      this.showPlainDocument();
-    }
-    else {
-      this.toggleButton = MessageConstant.TOGGLE_BUTTON_ONE;
-    }
-  }
-
-  showPlainDocument() {
-    let doc: any = document.getElementById('mydoc') as HTMLInputElement;
-    let content = this.commonService.getFileContent();
-    doc.innerHTML = content;
-    this.showHighlightedDocument(doc);
-  }
-
-  showHighlightedDocument(doc: any) {
-    let contentJson = this.tableData;
-    contentJson.forEach((item: IfileContentJson) => {
-      doc.innerHTML = doc.innerHTML.replace(item.value, `<span style="background:yellow" id="{{item.category}}">${item.value}</span>`)
-    });
-  }
-
-  downloadFile() {
-    this.fileUploadService.exportFile();
-  }
-
   openDialog(row:IfileContentJson){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
@@ -87,8 +50,10 @@ export class TableComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed',result);
-      row.category = result;
-      this.dataSource.paginator = this.paginator;
+      if(result){
+        row.category = result;
+        this.dataSource.paginator = this.paginator;
+      }
     });
   }
 

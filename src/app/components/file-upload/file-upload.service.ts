@@ -27,13 +27,12 @@ export class FileUploadService {
 		return this.http.post(this.baseApiUrl, formData)
 	}
 
-	exportFile() {
+	exportFile(doc:any) {
 		let fileName = MessageConstant.FILE_NAME.name1;
 		let fileType = MessageConstant.FILE_TYPE.type1;
 		let defaultFile = MessageConstant.FILE_NAME.default + MessageConstant.FILE_TYPE.default;
 		let preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 		let postHtml = "</body></html>";
-		let doc: any = document.getElementById("mydoc") as HTMLInputElement
 		let html = preHtml + doc.innerHTML + postHtml;
 		let blob = new Blob(['\ufeff', html], { type: 'application/msword' });
 		let url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);

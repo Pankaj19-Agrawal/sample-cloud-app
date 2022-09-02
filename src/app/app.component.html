@@ -1,11 +1,6 @@
 <div fxLayout="row">
     <div fxFlex="100">
-        <!-- <mat-card class="file-card"> -->
-            <app-file-upload (jsonData)="dataForTable($event)"></app-file-upload>
-        <!-- </mat-card> -->
-        <!-- <mat-card *ngIf="tableData">
-            <app-table [tableData]="tableData"></app-table> 
-        </mat-card> -->
+        <app-file-upload></app-file-upload>
     </div>
 </div>
 <router-outlet></router-outlet>
