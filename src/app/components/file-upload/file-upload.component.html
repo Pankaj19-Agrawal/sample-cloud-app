@@ -2,7 +2,7 @@
 	<div fxLayout="row">
 		<div fxFlex>
 			<input class="form-control" type="file" (change)="onChange($event)">
-			<button mat-raised-button color="primary" (click)="onUpload()" >{{uploadButton}}</button>
+			<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div>
 		<!-- [disabled]="!file" -->
 		<!-- accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->

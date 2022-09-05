@@ -97,6 +97,7 @@ import { FormsModule } from '@angular/forms';
         MatPaginatorModule,
         MatCardModule,
         MatDialogModule,
+        MatSnackBarModule,
         FormsModule
     ],
     providers: [

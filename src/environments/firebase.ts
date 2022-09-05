@@ -6,6 +6,7 @@ export const configuration = {
       storageBucket: "us-gcp-ame-its-gbhqe-sbx-1.appspot.com",
       messagingSenderId: "472625191829",
       appId: "1:472625191829:web:095d5735d70fc99b68749c",
-      measurementId: "G-FX5T0FDZ0D"
+      measurementId: "G-FX5T0FDZ0D",
+      databaseURL:"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com/"
     }
   };

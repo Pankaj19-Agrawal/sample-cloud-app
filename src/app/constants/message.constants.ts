@@ -9,5 +9,6 @@ export class MessageConstant{
     public static FILE_TYPE = {'type1':'.doc','default':'.doc'};
     public static DIALOG_BUTTON = {'ok':'Update','cancel':'Cancel'};
     public static DIALOG_WIDTH = '400px';
+    public static TOAST_MESSAGE = {'success':'File Uploaded Successfully !','fail':'Error'};
     
 }

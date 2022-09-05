@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators'
 import { UrlConstant } from 'src/app/constants/url.constants';
 import { MessageConstant } from 'src/app/constants/message.constants';
@@ -9,23 +9,18 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/datab
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FileUpload } from 'src/app/models/fileUpload';
 
+// import { getStorage, ref } from "firebase/storage";
+
 @Injectable({ providedIn: 'root' })
 
 export class FileUploadService {
-	baseApiUrl: string = UrlConstant.UPLOAD_FILE_URL;
-	private basePath = '/uploads';
-
+	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;	
+	// responseUrl:string;
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
 		private storage: AngularFireStorage
 	) { }
-
-	upload(file: any): Observable<any> {
-		const formData = new FormData();
-		formData.append("file", file, file.name);
-		return this.http.post(this.baseApiUrl, formData)
-	}
 
 	exportFile(doc:any) {
 		let fileName = MessageConstant.FILE_NAME.name1;
@@ -91,8 +86,15 @@ export class FileUploadService {
 		storageRef.child(name).delete();
 	}
 
-	getFile(){
-		const url = 'https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2Fstring.txt?alt=media&token=669040bf-06bf-45c5-b12a-ca42e9f80dc5'
-		return this.http.get(url, {responseType: "text"});
+	// getResponseFileUrl(){
+	// 	const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH + UrlConstant.RESPONSE_FILE_NAME;
+	// 	this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
+	// 		console.log('FILE UPLOAD SERVICE 105',url);
+	// 		this.responseUrl = url;
+	// 	});
+	// }
+	
+	getResponseFileContent(url:string){
+		return this.http.get(url);
 	}
 }

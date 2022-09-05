@@ -4,6 +4,8 @@ import { FileUploadService } from './file-upload.service';
 import { CommonService } from 'src/app/services/common.service';
 import { IfileContentJson } from 'src/app/models/fileContentJson.model';
 import { FileUpload } from 'src/app/models/fileUpload';
+import { UrlConstant } from 'src/app/constants/url.constants';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
 	selector: 'app-file-upload',
@@ -21,14 +23,17 @@ export class FileUploadComponent {
 	isPreElementCss:boolean = false;
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
 
-	constructor(private fileUploadService: FileUploadService, private commonService: CommonService) { }
+	constructor
+	(private fileUploadService: FileUploadService, 
+		private commonService: CommonService,
+		private storage: AngularFireStorage
+	) { }
 
 	//on file change
 	onChange(event: any) {
-		// this.file = event.target;  
-		// this.loadPlainFile();
+		this.file = event.target;  
+		this.loadPlainFile();
 		this.selectedFiles = event.target.files;
-		this.getFile();
 	}
 
 	//on file upload
@@ -37,22 +42,59 @@ export class FileUploadComponent {
 	// 	this.getPlainFileContent();
 	// }
 
-	//pass data to table component
-	setTableData() {
-		this.tableData = [
-			{
-				category: 'test 1',
-				value: 'The standard Lorem Ipsum passage, used since the 1500s'
+	//to upload file in gcp bucket
+	onUpload() {
+		const file = this.selectedFiles.item(0);
+		this.selectedFiles = undefined;
+		this.currentFileUpload = new FileUpload(file);
+		this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+			(percentage: any) => {
+				this.percentage = Math.round(percentage);
+				if(this.percentage == 100) 
+					this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
+				this.getResponseFileUrl();
 			},
-			{
-				category: 'test 2',
-				value: 'Hampden-Sydney College in Virginia'
-			},
-			{
-				category: 'test 3',
-				value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
+			error => {
+				this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.fail);
+				console.log(error);
 			}
-		];
+		);
+	}
+
+	//get response file url
+	getResponseFileUrl(){
+		const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH + UrlConstant.RESPONSE_FILE_NAME;
+		this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
+			console.log('FILE UPLOAD COMPONENT 68',url);
+			this.getResponseFileContent(url);
+		});
+	}
+
+	//get content for table
+	getResponseFileContent(url:string){
+		this.fileUploadService.getResponseFileContent(url).subscribe((res:any)=>{
+			this.setTableData(res);
+		});
+	}
+
+	//pass data to table component
+	setTableData(data:IfileContentJson[]) {
+		this.tableData = data;
+		this.getPlainFileContent();
+		// this.tableData = [
+		// 	{
+		// 		category: 'test 1',
+		// 		value: 'The standard Lorem Ipsum passage, used since the 1500s'
+		// 	},
+		// 	{
+		// 		category: 'test 2',
+		// 		value: 'Hampden-Sydney College in Virginia'
+		// 	},
+		// 	{
+		// 		category: 'test 3',
+		// 		value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
+		// 	}
+		// ];
 	}
 
 	//set uploaded file data in textarea
@@ -91,20 +133,21 @@ export class FileUploadComponent {
 
 	//set highlighted text into pre element
 	convertPlainTextToHighlightedText(preElement: any) {
-		let contentJson = [
-			{
-				category: 'test 1',
-				value: 'The standard Lorem Ipsum passage, used since the 1500s'
-			},
-			{
-				category: 'test 2',
-				value: 'Hampden-Sydney College in Virginia'
-			},
-			{
-				category: 'test 3',
-				value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
-			}
-		];
+		let contentJson = this.tableData;
+		// [
+		// 	{
+		// 		category: 'test 1',
+		// 		value: 'The standard Lorem Ipsum passage, used since the 1500s'
+		// 	},
+		// 	{
+		// 		category: 'test 2',
+		// 		value: 'Hampden-Sydney College in Virginia'
+		// 	},
+		// 	{
+		// 		category: 'test 3',
+		// 		value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
+		// 	}
+		// ];
 		contentJson.forEach((item: IfileContentJson) => {
 		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+'" title="'+item.category+'">'+item.value+'</span>')
 		});
@@ -115,31 +158,4 @@ export class FileUploadComponent {
 		let preElement = document.getElementById('pre-element') as HTMLInputElement;
 		this.fileUploadService.exportFile(preElement);
 	}
-	
-	//to upload file in gcp bucket
-	onUpload() {
-		const file = this.selectedFiles.item(0);
-		this.selectedFiles = undefined;
-		this.currentFileUpload = new FileUpload(file);
-		this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-			(percentage: any) => {
-				this.percentage = Math.round(percentage);
-			},
-			error => {
-				console.log(error);
-			}
-		);
-	}
-
-	getFile(){
-		this.fileUploadService.getFile().subscribe((data:any)=>{
-
-			console.log('data',data);
-		});
-	}
-
 }
-
-
-// string.txt
-// https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2Fstring.txt?alt=media&token=669040bf-06bf-45c5-b12a-ca42e9f80dc5
