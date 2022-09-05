@@ -22,7 +22,7 @@ export class FileUploadComponent {
 	percentage: number;
 	isPreElementCss:boolean = false;
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
-	enabledFileType = MessageConstant.ENABLED_FILE_TYPE[0];
+	enabledFileType = MessageConstant.ENABLED_FILE_TYPE;
 
 	constructor(
 		private fileUploadService: FileUploadService, 
