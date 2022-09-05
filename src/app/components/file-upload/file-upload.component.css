@@ -1,5 +1,6 @@
-.file-card{
-    margin: 1em 0;
+.file-card,.table-card,.download-btn-div,.document-div{
+    margin: 1em 0.5em;
+    border-radius: 0;
 }
 .full-width{
     width: 100%;
@@ -26,4 +27,11 @@ pre {
 }
 .p-1{
     padding: 1em !important;
+}
+.download-btn-div{
+    margin-bottom: 0;
+}
+.document-div{
+    margin-top: 0;
+    padding-top: 0;
 }

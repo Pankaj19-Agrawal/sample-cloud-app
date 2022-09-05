@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators'
-import { UrlConstant } from 'src/app/constants/url.constants';
-import { MessageConstant } from 'src/app/constants/message.constants';
-
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FileUpload } from 'src/app/models/fileUpload';
 
-// import { getStorage, ref } from "firebase/storage";
+import { UrlConstant } from 'src/app/constants/url.constants';
+import { MessageConstant } from 'src/app/constants/message.constants';
+import { FileUpload } from 'src/app/models/fileUpload';
 
 @Injectable({ providedIn: 'root' })
 
 export class FileUploadService {
-	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;	
-	// responseUrl:string;
+	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
@@ -86,14 +82,6 @@ export class FileUploadService {
 		storageRef.child(name).delete();
 	}
 
-	// getResponseFileUrl(){
-	// 	const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH + UrlConstant.RESPONSE_FILE_NAME;
-	// 	this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
-	// 		console.log('FILE UPLOAD SERVICE 105',url);
-	// 		this.responseUrl = url;
-	// 	});
-	// }
-	
 	getResponseFileContent(url:string){
 		return this.http.get(url);
 	}

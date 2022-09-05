@@ -1,16 +1,13 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input class="form-control" type="file" (change)="onChange($event)">
+			<input class="form-control" [accept]="enabledFileType" type="file" (change)="onChange($event)">
 			<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
-		</div>
-		<!-- [disabled]="!file" -->
-		<!-- accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
-		<!-- accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" -->
+		</div> 
 	</div>
 </mat-card>
 
-<mat-card *ngIf="tableData">
+<mat-card *ngIf="tableData" class="table-card">
 	<div fxLayout="row">
 		<div fxFlex>
 			<app-table [tableData]="tableData" *ngIf="tableData"></app-table>
@@ -20,13 +17,13 @@
 
 <textarea cols="50" rows="10" hidden>a</textarea>
 
-
-<div fxLayout="row" class="mt-1 p-1" [ngClass]="{'PreElementCss':isPreElementCss}">
+<div fxLayout="row" class="p-1 download-btn-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="text-right">
 		<button mat-raised-button color="primary" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
 	</div>
 </div>
-<div fxLayout="row" [ngClass]="{'PreElementCss':isPreElementCss}">
+
+<div fxLayout="row" class="document-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="scrolling-enable">
 		<pre id="pre-element"></pre>
 	</div>

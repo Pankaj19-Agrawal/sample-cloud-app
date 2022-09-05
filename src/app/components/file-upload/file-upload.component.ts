@@ -22,12 +22,15 @@ export class FileUploadComponent {
 	percentage: number;
 	isPreElementCss:boolean = false;
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
+	enabledFileType = MessageConstant.ENABLED_FILE_TYPE[0];
 
-	constructor
-	(private fileUploadService: FileUploadService, 
+	constructor(
+		private fileUploadService: FileUploadService, 
 		private commonService: CommonService,
 		private storage: AngularFireStorage
-	) { }
+	) { 
+		
+	}
 
 	//on file change
 	onChange(event: any) {
@@ -65,7 +68,6 @@ export class FileUploadComponent {
 	getResponseFileUrl(){
 		const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH + UrlConstant.RESPONSE_FILE_NAME;
 		this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
-			console.log('FILE UPLOAD COMPONENT 68',url);
 			this.getResponseFileContent(url);
 		});
 	}
@@ -81,20 +83,6 @@ export class FileUploadComponent {
 	setTableData(data:IfileContentJson[]) {
 		this.tableData = data;
 		this.getPlainFileContent();
-		// this.tableData = [
-		// 	{
-		// 		category: 'test 1',
-		// 		value: 'The standard Lorem Ipsum passage, used since the 1500s'
-		// 	},
-		// 	{
-		// 		category: 'test 2',
-		// 		value: 'Hampden-Sydney College in Virginia'
-		// 	},
-		// 	{
-		// 		category: 'test 3',
-		// 		value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
-		// 	}
-		// ];
 	}
 
 	//set uploaded file data in textarea
@@ -134,20 +122,6 @@ export class FileUploadComponent {
 	//set highlighted text into pre element
 	convertPlainTextToHighlightedText(preElement: any) {
 		let contentJson = this.tableData;
-		// [
-		// 	{
-		// 		category: 'test 1',
-		// 		value: 'The standard Lorem Ipsum passage, used since the 1500s'
-		// 	},
-		// 	{
-		// 		category: 'test 2',
-		// 		value: 'Hampden-Sydney College in Virginia'
-		// 	},
-		// 	{
-		// 		category: 'test 3',
-		// 		value: 'Itaque earum rerum hic tenetur a sapiente delectus,'
-		// 	}
-		// ];
 		contentJson.forEach((item: IfileContentJson) => {
 		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+'" title="'+item.category+'">'+item.value+'</span>')
 		});
