@@ -20,8 +20,17 @@ export class EditDialogComponent implements OnInit {
     this.category = this.data.category;
   }
 
-  onNoClick(): void {
+  cancel(): void {
     this.dialogRef.close();
+  }
+
+  update(){
+    const obj = {
+      category: this.data.category,
+      newCategory: this.category,
+      value: this.data.value
+    }
+    this.dialogRef.close(obj);
   }
 
 }

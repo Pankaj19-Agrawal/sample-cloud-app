@@ -121,8 +121,8 @@ export class FileUploadComponent {
 	//set highlighted text into pre element
 	convertPlainTextToHighlightedText(preElement: any) {
 		let contentJson = this.tableData;
-		contentJson.forEach((item: IfileContentJson) => {
-		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+'" title="'+item.category+'">'+item.value+'</span>')
+		contentJson.forEach((item: IfileContentJson, i: number) => {
+		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+i+'" title="'+item.category+'">'+item.value+'</span>')
 		});
 	}
 
@@ -130,5 +130,64 @@ export class FileUploadComponent {
 	downloadFile() {
 		let preElement = document.getElementById('pre-element') as HTMLInputElement;
 		this.fileUploadService.exportFile(preElement);
+	}
+
+	//category updated inside table
+	onCategoryUpdate(data:any){
+		const index = data.index;
+		const newCategory = data.newCategory;
+		this.tableData[index].category = newCategory;
+		this.getPlainFileContent();
+
+		//one more thing need to do here
+		//need to upload json file in gcp bucket
+		//with value 
+		// {modelPrediction:'abc',actualPrediction:'xyz',value:'asdsdfsdsaf'}
+		this.saveActualPrediction(data);
+	}
+
+	saveActualPrediction(obj:any){
+		const url = "https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2FactualPrediction.json?alt=media&token=953f1c78-267f-4930-bcbe-b1d4a9a9f243";
+		const data = [
+			{
+				"modelPrediction": obj.category,
+				"actualPrediction": obj.newCategory,
+				"text": obj.value
+			}
+		];
+		this.fileUploadService.replaceFileData(url,data).subscribe(res=>{
+			console.log('res',res);
+			this.temporaryUpdateResponseJsonFile(obj);
+		})
+	}
+
+	temporaryUpdateResponseJsonFile(obj:any){
+		const responseJson = [
+			{
+				"category": "test 1",
+				"value": "The standard Lorem Ipsum passage, used since the 1600s"
+			},
+			{
+				"category": "test 2",
+				"value": "Hampden-Sydney College in Virginia"
+			},
+			{
+				"category": "test 3",
+				"value": "Itaque earum rerum hic tenetur a sapiente delectus,"
+			},
+			{
+				"category": "test 1",
+				"value": "(The Extremes of Good and Evil)"
+			},
+			{
+				"category": "test 1",
+				"value": "anything embarrassing hidden in the middle of text"
+			}
+		];
+		const url = "https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2Fresponse.json?alt=media&token=ee31e272-c0e2-4ea1-b988-28a9db33700b"
+		responseJson[obj.index].category = obj.newCategory;
+		this.fileUploadService.updateJsonFileData(url,responseJson).subscribe(res=>{
+			console.log('res',res);
+		})
 	}
 }

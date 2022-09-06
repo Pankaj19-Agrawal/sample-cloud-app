@@ -14,6 +14,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { configuration } from '../environments/firebase';
 import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 import { DisplayDocumentComponent } from './components/display-document/display-document.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DisplayDocumentComponent } from './components/display-document/display-
     FileUploadComponent,
     TableComponent,
     EditDialogComponent,
-    DisplayDocumentComponent
+    DisplayDocumentComponent,
+    HeaderComponent
   ],
   imports: [
     AngularMaterialModule,

@@ -6,8 +6,7 @@
 </div>
 <div fxLayout="row">
     <div fxFlex class="dialog-buttons">
-        <button mat-raised-button (click)="onNoClick()">{{dialogButton.cancel}}</button>
-        <button mat-raised-button color="primary" class="update-button" [mat-dialog-close]="category"
-            cdkFocusInitial>{{dialogButton.ok}}</button>
+        <button mat-raised-button (click)="cancel()">{{dialogButton.cancel}}</button>
+        <button mat-raised-button color="primary" class="update-button" (click)="update()" cdkFocusInitial>{{dialogButton.ok}}</button>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input class="form-control" accept=".txt" type="file" (change)="onChange($event)">
+			<input class="form-control" accept=".txt,.json" type="file" (change)="onChange($event)">
 			<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div> 
 	</div>
@@ -10,7 +10,7 @@
 <mat-card *ngIf="tableData" class="table-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<app-table [tableData]="tableData" *ngIf="tableData"></app-table>
+			<app-table (onCategoryUpdate)="onCategoryUpdate($event)" [tableData]="tableData" *ngIf="tableData"></app-table>
 		</div>
 	</div>
 </mat-card>

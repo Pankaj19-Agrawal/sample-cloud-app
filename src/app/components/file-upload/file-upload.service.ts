@@ -85,4 +85,12 @@ export class FileUploadService {
 	getResponseFileContent(url:string){
 		return this.http.get(url);
 	}
+
+	replaceFileData(url:string,data:any){
+		return this.http.post(url,data); 
+	}
+
+	updateJsonFileData(url:string,data:any){
+		return this.http.post(url,data); 
+	}
 }

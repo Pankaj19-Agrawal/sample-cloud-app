@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ViewChild, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MessageConstant } from 'src/app/constants/message.constants';
@@ -19,9 +19,11 @@ export class TableComponent implements AfterViewInit, OnInit {
   tableHeader: iHeader = MessageConstant.TABLE_HEADER;
   displayedColumns: string[] = MessageConstant.JSON_PROPERTIES;
   dataSource: MatTableDataSource<IfileContentJson>;
+  @Output() onCategoryUpdate: EventEmitter<IfileContentJson> = new EventEmitter<IfileContentJson>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<any>;
 
   constructor(
     public dialog: MatDialog
@@ -42,7 +44,7 @@ export class TableComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) this.dataSource.paginator.firstPage();
   }
 
-  openDialog(row:IfileContentJson){
+  openDialog(row:IfileContentJson,index:number){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
       data: row,
@@ -51,8 +53,11 @@ export class TableComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed',result);
       if(result){
-        row.category = result;
+        row.category = result.newCategory;
         this.dataSource.paginator = this.paginator;
+        // this.table.renderRows();
+        result.index = index;
+        this.onCategoryUpdate.emit(result);
       }
     });
   }
