@@ -1,0 +1,21 @@
+<div fxLayout="row">
+    <div fxFlex class="container">
+        <mat-card>
+            <div class="lock-icon text-center"><mat-icon>lock</mat-icon></div>
+            <mat-card-title class="text-center"><h4><b>Welcome</b></h4></mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="loginForm">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Username" type="text" name="username" formControlName="username">
+                    </mat-form-field><br />
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Password" type="password" name="password" formControlName="password">
+                    </mat-form-field><br />
+                    <button mat-raised-button color="primary" class="full-width" (click)="login()">Login</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

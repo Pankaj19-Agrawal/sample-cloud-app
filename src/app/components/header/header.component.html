@@ -2,4 +2,8 @@
     <span><img [src]="imgPath" class="header-img"></span>
     <span class="seprator"></span>
     <span class="title">{{title}}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button class="example-icon" aria-label="Logout" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
 </mat-toolbar>

@@ -34,7 +34,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule( {
@@ -74,7 +74,8 @@ import { FormsModule } from '@angular/forms';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
 
     ],
     exports: [
@@ -98,7 +99,8 @@ import { FormsModule } from '@angular/forms';
         MatCardModule,
         MatDialogModule,
         MatSnackBarModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         MatDatepickerModule,

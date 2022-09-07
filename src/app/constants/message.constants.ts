@@ -12,5 +12,7 @@ export class MessageConstant{
     public static DIALOG_WIDTH = '400px';
     public static TOAST_MESSAGE = {'success':'File Uploaded Successfully !','fail':'Error'};
     public static HEADER_IMG_PATH = '../assets/us-deloitte-logo.png';
+    public static INVALID_CREDENTIALS = 'Invalid Username/Password';
+    
     
 }
