@@ -74,14 +74,17 @@ export class FileUploadComponent {
 	//get content for table
 	getResponseFileContent(url:string){
 		this.fileUploadService.getResponseFileContent(url).subscribe((res:any)=>{
-			// let result = Object.keys(res).map(key => ({category: key, value: res[key]}));
-			// this.setTableData(result);
-			this.setTableData(res);
+			console.log('getResponseFileContent res', res);
+			let result = Object.keys(res).map(key => ({category: key, value: res[key]}));
+			console.log('getResponseFileContent result', result);
+			this.setTableData(result);
+			// this.setTableData(res);
 		});
 	}
 
 	//pass data to table component
 	setTableData(data:IfileContentJson[]) {
+		console.log('setTableData data', data);
 		this.tableData = data;
 		this.getPlainFileContent();
 	}
