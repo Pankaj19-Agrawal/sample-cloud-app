@@ -1,5 +1,5 @@
 export class MessageConstant{
-    public static APP_TITLE = 'My Application';
+    public static APP_TITLE = 'Risk Annotation';
     public static TOGGLE_BUTTON_ONE = 'Show Document';
     public static TOGGLE_BUTTON_TWO = 'Show Table';
     public static DOWNLOAD_DOCUMENT = 'Download';
