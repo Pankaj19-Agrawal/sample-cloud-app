@@ -2,6 +2,14 @@
   width: 100%;
 }
 
+::ng-deep .data-table thead{
+  background: #f4f1f4;
+}
+
+.data-table th{
+  color: #000;
+}
+
 .input-container {
   font-size: 14px;
   width: 100%;
@@ -21,4 +29,9 @@
 
 .content-div {
   margin-top: 1em;
+}
+
+.table-container{
+  height: 400px;
+  overflow-y: auto;
 }

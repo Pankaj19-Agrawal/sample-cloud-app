@@ -2,7 +2,7 @@
 	<div fxLayout="row">
 		<div fxFlex>
 			<input class="form-control" accept=".txt,.json" type="file" (change)="onChange($event)">
-			<button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
+			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div> 
 	</div>
 </mat-card>
@@ -19,7 +19,7 @@
 
 <div fxLayout="row" class="p-1 download-btn-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="text-right">
-		<button mat-raised-button color="primary" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
+		<button mat-raised-button class="btn-color" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
 	</div>
 </div>
 
