@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MessageConstant } from 'src/app/constants/message.constants';
 import { FileUploadService } from './file-upload.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -14,6 +14,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class FileUploadComponent {
 	@Output() jsonData: EventEmitter<IfileContentJson[]> = new EventEmitter<IfileContentJson[]>();
+	@ViewChild('fileInput') fileInputVariable: ElementRef;
 	uploadButton: string = MessageConstant.UPLOAD_BUTTON;
 	file = null;
 	tableData:IfileContentJson[]
@@ -52,15 +53,24 @@ export class FileUploadComponent {
 		this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
 			(percentage: any) => {
 				this.percentage = Math.round(percentage);
-				if(this.percentage == 100) 
+				if(this.percentage == 100){
 					this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
-				this.getResponseFileUrl();
+					this.getResponseFileUrl();
+					this.reset();
+				} 
 			},
 			error => {
 				this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.fail);
+				this.reset();
 				console.log(error);
 			}
-		);
+		); 
+	}
+
+	//reset input & disable upload button
+	reset(){
+		this.fileInputVariable.nativeElement.value = null;
+		this.file = null
 	}
 
 	//get response file url
@@ -74,18 +84,21 @@ export class FileUploadComponent {
 	//get content for table
 	getResponseFileContent(url:string){
 		this.fileUploadService.getResponseFileContent(url).subscribe((res:any)=>{
-			console.log('getResponseFileContent res', res);
 			let result = Object.keys(res).map(key => ({category: key, value: res[key]}));
-			console.log('getResponseFileContent result', result);
-			this.setTableData(result);
-			// this.setTableData(res);
+			if(result.length) this.setTableData(result);
 		});
 	}
 
 	//pass data to table component
 	setTableData(data:IfileContentJson[]) {
-		console.log('setTableData data', data);
 		this.tableData = data;
+
+		//test code start
+		// let content:any = document.querySelector('textarea')?.value;
+		// let subStr = content.substring(140,447)
+		// let myData = [{category:'test case 1',value:subStr}]
+		// this.tableData = myData;
+		//test code end
 		this.getPlainFileContent();
 	}
 
@@ -129,12 +142,27 @@ export class FileUploadComponent {
 		contentJson.forEach((item: IfileContentJson, i: number) => {
 		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+i+'" title="'+item.category+'">'+item.value+'</span>')
 		});
+		// this.deleteThis()
+		// test code start 
+		// let subStr = preElement.innerHTML.substring(140,447)
+		// console.log('subStr',subStr);
+		// let newStr = '<span style="background:red" id="test case 10" title="test category 1">' + subStr + '</span>'
+		// preElement.innerHTML = preElement.innerHTML.replace(subStr,newStr)
+		// test code end
 	}
 
 	//file download
 	downloadFile() {
 		let preElement = document.getElementById('pre-element') as HTMLInputElement;
+		// let preElement = document.querySelector('textarea');
 		this.fileUploadService.exportFile(preElement);
+	}
+
+	deleteThis(){
+		var csv = document.getElementById('pre-element') as HTMLInputElement;
+		var data = new Blob(['\ufeff',csv?.innerHTML]);
+		var a2 = document.getElementById("a2") as HTMLAnchorElement;
+		a2.href = URL.createObjectURL(data);
 	}
 
 	//category updated inside table

@@ -1,1 +1,5 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+.snackbar{
+    background-color: #86bc25;
+    color: #fff;
+}

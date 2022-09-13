@@ -25,8 +25,11 @@ export class FileUploadService {
 		let preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 		let postHtml = "</body></html>";
 		let html = preHtml + doc.innerHTML + postHtml;
+		// let html = preHtml + doc.value + postHtml;
 		let blob = new Blob(['\ufeff', html], { type: 'application/msword' });
 		let url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+		// let url = 'data:text/plain;charset=utf-8,' + encodeURIComponent(html);
+		// let url = 'data:application/octet-stream,' + encodeURIComponent(html);
 		fileName = fileName ? fileName + fileType : defaultFile;
 		let downloadLink = document.createElement("a");
 		document.body.appendChild(downloadLink);
@@ -42,7 +45,8 @@ export class FileUploadService {
 	}
 
 	pushFileToStorage(fileUpload: FileUpload) {
-		const filePath = `${this.basePath}/${fileUpload.file.name}`;
+		const timestamp = Date.now() + '_';
+		const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(

@@ -1,8 +1,9 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input class="form-control" accept=".txt,.json" type="file" (change)="onChange($event)">
+			<input #fileInput class="form-control" accept=".txt,.json" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
+			<!-- <a id="a2" download="Download.doc" type="application/msword">Download doc (via Blob)</a> -->
 		</div> 
 	</div>
 </mat-card>
