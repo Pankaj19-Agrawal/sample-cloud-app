@@ -29,7 +29,7 @@ export class CommonService {
 		this.snackBar.open(message, '', {
       		horizontalPosition: this.horizontalPosition,
       		verticalPosition: this.verticalPosition,
-	  		duration: 3000,
+	  		duration: 2000,
             panelClass: ['snackbar']
     	});
 	}

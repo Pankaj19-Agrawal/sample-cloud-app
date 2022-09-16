@@ -14,12 +14,14 @@
         <ng-container matColumnDef="sno">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header0}}</b> </th>
           <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+          <!-- <td mat-cell *matCellDef="let row;"> {{row.id}} </td> -->
         </ng-container>
 
         <ng-container matColumnDef="category">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header1}}</b> </th>
           <td mat-cell *matCellDef="let row; let i = index"> 
             <a href="#{{row.category + i}}">{{row.category}}</a> 
+            <!-- <a href="#{{row.category + i}}" *ngFor="let item of row.category">{{item}}</a>  -->
           </td>
         </ng-container>
     

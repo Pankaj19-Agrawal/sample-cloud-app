@@ -1,11 +1,12 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { interval, Subscription } from 'rxjs';
 import { MessageConstant } from 'src/app/constants/message.constants';
 import { FileUploadService } from './file-upload.service';
 import { CommonService } from 'src/app/services/common.service';
 import { IfileContentJson } from 'src/app/models/fileContentJson.model';
 import { FileUpload } from 'src/app/models/fileUpload';
 import { UrlConstant } from 'src/app/constants/url.constants';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
 	selector: 'app-file-upload',
@@ -23,6 +24,7 @@ export class FileUploadComponent {
 	percentage: number;
 	isPreElementCss:boolean = false;
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
+	isLoading:boolean = false;
 
 	constructor(
 		private fileUploadService: FileUploadService, 
@@ -32,11 +34,21 @@ export class FileUploadComponent {
 		
 	}
 
+	callApi(){
+		const fileName = 'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf';
+		this.fileUploadService.uploadFileApi('function-1').subscribe((res)=>{
+			console.log('new api res',res); 
+		})
+	}
+
 	//on file change
+	uploadedFileName:string
 	onChange(event: any) {
 		this.file = event.target;  
 		this.loadPlainFile();
 		this.selectedFiles = event.target.files;
+		this.uploadedFileName = this.selectedFiles[0].name;
+		this.uploadedFileName.substring(0, this.uploadedFileName.length - 4)
 	}
 
 	//on file upload
@@ -54,9 +66,11 @@ export class FileUploadComponent {
 			(percentage: any) => {
 				this.percentage = Math.round(percentage);
 				if(this.percentage == 100){
-					this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
-					this.getResponseFileUrl();
+					this.showToastMessage();
 					this.reset();
+					this.showLoader();
+					// this.hideLoader();
+					// this.getResponseFileUrl();
 				} 
 			},
 			error => {
@@ -67,32 +81,65 @@ export class FileUploadComponent {
 		); 
 	}
 
-	//reset input & disable upload button
+	showToastMessage(){
+		this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
+	}
+
 	reset(){
 		this.fileInputVariable.nativeElement.value = null;
 		this.file = null
 	}
 
+	showLoader(){
+		setTimeout(()=>{
+			this.isLoading = true;
+			this.getResponseFileUrl();
+		},1500);
+	}
+
+	hideLoader(){
+		this.isLoading = false;
+	}
+
 	//get response file url
 	getResponseFileUrl(){
-		const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH + UrlConstant.RESPONSE_FILE_NAME;
+		let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
+		fileName = fileName + UrlConstant.FILENAME_SUFFIX;
+		const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH +'/'+ fileName;
 		this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
 			this.getResponseFileContent(url);
+		},
+		(error)=>{
+			setTimeout(()=>{
+				this.getResponseFileUrl();
+			},15000);
 		});
 	}
 
 	//get content for table
 	getResponseFileContent(url:string){
 		this.fileUploadService.getResponseFileContent(url).subscribe((res:any)=>{
+			//working
 			let result = Object.keys(res).map(key => ({category: key, value: res[key]}));
 			if(result.length) this.setTableData(result);
+			//working
+
+			// let result = Object.keys(res).map(key => ({id: key, category:res[key], value: res[key]}));
+			// result.forEach((item,index)=>{
+			// 	if(item.value[0] !== '{}'){
+			// 		item.category = Object.keys(item.value[0])
+			// 		item.value = Object.values(item.value[0])
+			// 	}
+			// })
+			// console.log(result);
+			// this.setTableData(result);
 		});
 	}
 
 	//pass data to table component
 	setTableData(data:IfileContentJson[]) {
 		this.tableData = data;
-
+		this.hideLoader();
 		//test code start
 		// let content:any = document.querySelector('textarea')?.value;
 		// let subStr = content.substring(140,447)

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { finalize } from 'rxjs/operators'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, delay, finalize, retryWhen, take } from 'rxjs/operators'
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireFunctions } from '@angular/fire/compat/functions';
 
 import { UrlConstant } from 'src/app/constants/url.constants';
 import { MessageConstant } from 'src/app/constants/message.constants';
 import { FileUpload } from 'src/app/models/fileUpload';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
@@ -15,7 +18,8 @@ export class FileUploadService {
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
-		private storage: AngularFireStorage
+		private storage: AngularFireStorage,
+		private fireFunction: AngularFireFunctions
 	) { }
 
 	exportFile(doc:any) {
@@ -46,7 +50,8 @@ export class FileUploadService {
 
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
-		const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
+		// const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
+		const filePath = `${this.basePath}/${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(
@@ -87,7 +92,12 @@ export class FileUploadService {
 	}
 
 	getResponseFileContent(url:string){
-		return this.http.get(url);
+		return this.http.get(url)
+			.pipe(
+				catchError((err) => {
+			  		return throwError(err);
+				})
+		  	)
 	}
 
 	replaceFileData(url:string,data:any){
@@ -97,4 +107,18 @@ export class FileUploadService {
 	updateJsonFileData(url:string,data:any){
 		return this.http.post(url,data); 
 	}
+
+	//api for file upload
+	// uploadFileApi(fileName:string): Observable<any>{
+	// 	const url:string = UrlConstant.UPLOAD_FILE_URL;
+	// 	const body = { message: fileName };
+	// 	const token:string = MessageConstant.BEARER_TOKEN;
+	// 	const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
+	// 	return this.http.post(url,body,{headers})
+	// }
+	uploadFileApi(functionName:string){
+		const callable = this.fireFunction.httpsCallable(functionName);
+		return callable({message:'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf'})
+	}
+	//api for file upload end
 }

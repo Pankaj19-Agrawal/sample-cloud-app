@@ -38,3 +38,15 @@ pre {
     background-color: #86bc25;
     color: #fff;
 }
+.loader{
+    height: 30%;
+    /* width: 100%; */
+    /* position: absolute; */
+    /* top: 0; */
+}
+.progress-bar{
+    top:16em;
+}
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke: black;
+}

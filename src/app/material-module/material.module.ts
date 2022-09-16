@@ -100,7 +100,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatDialogModule,
         MatSnackBarModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule
     ],
     providers: [
         MatDatepickerModule,

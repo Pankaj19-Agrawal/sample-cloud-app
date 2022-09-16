@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { TableComponent } from './components/table/table.component';
 
+import { AngularFireFunctionsModule, REGION, USE_EMULATOR, ORIGIN } from '@angular/fire/compat/functions';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -36,9 +37,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserModule,
     AngularFireModule.initializeApp(configuration.firebase),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireFunctionsModule
   ],
-  providers: [],
+  providers: [
+    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] },
+    // { provide: REGION, useValue: 'us-central1' },
+    // { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
+  //  { provide: ORIGIN, useValue: 'https://us-gcp-ame-its-gbhqe-sbx-1.web.app' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
