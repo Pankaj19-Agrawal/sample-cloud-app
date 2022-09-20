@@ -67,6 +67,7 @@ export class FileUploadService {
 	}
 
 	private saveFileData(fileUpload: FileUpload): void {
+		console.log('2',fileUpload)
 		this.db.list(this.basePath).push(fileUpload);
 	}
 
@@ -109,16 +110,45 @@ export class FileUploadService {
 	}
 
 	//api for file upload
-	// uploadFileApi(fileName:string): Observable<any>{
-	// 	const url:string = UrlConstant.UPLOAD_FILE_URL;
-	// 	const body = { message: fileName };
-	// 	const token:string = MessageConstant.BEARER_TOKEN;
-	// 	const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
-	// 	return this.http.post(url,body,{headers})
-	// }
-	uploadFileApi(functionName:string){
-		const callable = this.fireFunction.httpsCallable(functionName);
-		return callable({message:'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf'})
+
+	//version 1 working
+	uploadFileApi(fileName:string): Observable<any>{
+		const url:string = UrlConstant.UPLOAD_FILE_URL;
+		const body = { message: fileName };
+		const token:string = MessageConstant.BEARER_TOKEN;
+		const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+		return this.http.post(url,body,{headers})
 	}
+
+	//version 2 not working
+	// uploadFileApi(functionName:string){
+	// 	const callable = this.fireFunction.httpsCallable(functionName);
+	// 	return callable({message:'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf'})
+	// }
+
+	//version 3 working
+	// uploadFileApi(fileName:string){
+		// var myHeaders = new Headers();
+		// myHeaders.append("Authorization", "Bearer " +  MessageConstant.BEARER_TOKEN);
+		// myHeaders.append("Content-Type", "application/json");
+		// // myHeaders.append('Access-Control-Allow-Origin', 'https://us-gcp-ame-its-gbhqe-sbx-1.uc.r.appspot.com')
+
+		// var raw = JSON.stringify({
+		// 	"message": fileName
+		// });
+
+		// var requestOptions: any = {
+		// 	method: 'POST',
+		// 	headers: myHeaders,
+		// 	body: raw,
+		// 	redirect: 'follow'
+		// };
+
+		// fetch(UrlConstant.UPLOAD_FILE_URL + "?message=" + fileName + "&=", requestOptions)
+		// 	.then(response => response.text())
+		// 	.then(result => console.log(result))
+		// 	.catch(error => console.log('error', error));
+	// }
+
 	//api for file upload end
 }

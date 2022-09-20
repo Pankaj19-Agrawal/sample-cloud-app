@@ -3,7 +3,8 @@
 		<div fxFlex>
 			<input #fileInput class="form-control" accept=".txt,.json,.pdf" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
-			<button mat-raised-button class="btn-color" (click)="callApi()">{{'call api'}}</button>
+			<!-- <button mat-raised-button class="btn-color" (click)="callApi()">{{'call api'}}</button> -->
+			<!-- <button mat-raised-button class="btn-color" (click)="getToken()">{{'get token'}}</button> -->
 			<!-- <a id="a2" download="Download.doc" type="application/msword">Download doc (via Blob)</a> -->
 		</div> 
 	</div>

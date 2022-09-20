@@ -1,0 +1,360 @@
+[debug] [2022-09-19T04:10:27.643Z] ----------------------------------------------------------------------
+[debug] [2022-09-19T04:10:27.646Z] Command:       C:\Program Files\nodejs\node.exe D:\Users\pankajagrawal2\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-09-19T04:10:27.647Z] CLI Version:   11.9.0
+[debug] [2022-09-19T04:10:27.647Z] Platform:      win32
+[debug] [2022-09-19T04:10:27.647Z] Node Version:  v16.17.0
+[debug] [2022-09-19T04:10:27.648Z] Time:          Mon Sep 19 2022 09:40:27 GMT+0530 (India Standard Time)
+[debug] [2022-09-19T04:10:27.649Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-09-19T04:10:27.751Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-09-19T04:10:27.752Z] > authorizing via signed-in user (usa-pankajagrawal2@deloitte.com)
+[debug] [2022-09-19T04:10:27.753Z] [iam] checking project us-gcp-ame-its-gbhqe-sbx-1 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-09-19T04:10:27.757Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions [none]
+[debug] [2022-09-19T04:10:27.757Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions x-goog-quota-user=projects/us-gcp-ame-its-gbhqe-sbx-1
+[debug] [2022-09-19T04:10:27.758Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-09-19T04:10:28.698Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions 200
+[debug] [2022-09-19T04:10:28.698Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-09-19T04:10:28.699Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/serviceAccounts/us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-09-19T04:10:28.699Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/serviceAccounts/us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-09-19T04:10:29.816Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/serviceAccounts/us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-09-19T04:10:29.816Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/serviceAccounts/us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'us-gcp-ame-its-gbhqe-sbx-1'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-09-19T04:10:29.861Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 [none]
+[debug] [2022-09-19T04:10:30.828Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 200
+[debug] [2022-09-19T04:10:30.828Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 {"projectId":"us-gcp-ame-its-gbhqe-sbx-1","projectNumber":"472625191829","displayName":"us-gcp-ame-its-gbhqe-sbx-1","name":"projects/us-gcp-ame-its-gbhqe-sbx-1","resources":{"hostingSite":"us-gcp-ame-its-gbhqe-sbx-1","realtimeDatabaseInstance":"us-gcp-ame-its-gbhqe-sbx-1-default-rtdb","storageBucket":"us-gcp-ame-its-gbhqe-sbx-1.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_9ab11d33-a9c4-4de4-a648-dcdbca1142e0"}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2022-09-19T04:10:30.831Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudfunctions.googleapis.com [none]
+[debug] [2022-09-19T04:10:30.833Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/runtimeconfig.googleapis.com [none]
+[debug] [2022-09-19T04:10:30.834Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudbuild.googleapis.com [none]
+[debug] [2022-09-19T04:10:30.835Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/artifactregistry.googleapis.com [none]
+[debug] [2022-09-19T04:10:32.095Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudfunctions.googleapis.com 200
+[debug] [2022-09-19T04:10:32.095Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2022-09-19T04:10:32.099Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/runtimeconfig.googleapis.com 200
+[debug] [2022-09-19T04:10:32.100Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2022-09-19T04:10:32.103Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudbuild.googleapis.com 200
+[debug] [2022-09-19T04:10:32.104Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2022-09-19T04:10:32.111Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/artifactregistry.googleapis.com 200
+[debug] [2022-09-19T04:10:32.111Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2022-09-19T04:10:32.112Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/adminSdkConfig [none]
+[debug] [2022-09-19T04:10:33.035Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/adminSdkConfig 200
+[debug] [2022-09-19T04:10:33.035Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/adminSdkConfig {"projectId":"us-gcp-ame-its-gbhqe-sbx-1","databaseURL":"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com","storageBucket":"us-gcp-ame-its-gbhqe-sbx-1.appspot.com","locationId":"us-central"}
+[debug] [2022-09-19T04:10:33.036Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/configs [none]
+[debug] [2022-09-19T04:10:34.510Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/configs 200
+[debug] [2022-09-19T04:10:34.510Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1/configs {}
+[info] i  functions: preparing codebase default for deployment 
+[debug] [2022-09-19T04:10:34.512Z] Validating nodejs source
+[debug] [2022-09-19T04:10:39.817Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-09-19T04:10:39.818Z] Building nodejs source
+[debug] [2022-09-19T04:10:39.820Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-09-19T04:10:40.476Z] Serving at port 9006
+
+[debug] [2022-09-19T04:10:40.667Z] Got response from /__/functions.yaml {"endpoints":{"helloWorld":{"platform":"gcfv1","httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-09-19T04:10:40.682Z] shutdown requested via /__/quitquitquit
+
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged D:\Users\pankajagrawal2\PANKAJ\sample-cloud-app\functions (56.2 KB) for uploading 
+[debug] [2022-09-19T04:10:40.825Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions [none]
+[debug] [2022-09-19T04:10:42.311Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions 200
+[debug] [2022-09-19T04:10:42.312Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions {"functions":[{"name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/function-1","httpsTrigger":{"url":"https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/function-1","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"hello_world","timeout":"540s","availableMemoryMb":1024,"serviceAccountEmail":"us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com","updateTime":"2022-09-14T11:51:27.912Z","versionId":"10","labels":{"deployment-tool":"console-cloud","appid":"apm0001154","billingcode":"tpt00798-05-00-01-5137","businessarea":"deloitteapplicationstudios","cms":"us-das","country":"us","csclass":"confidential","csqual":"intellectual-property","cstype":"deloitte","description":"document-will-be-uploaded-from-a-storage","environment":"sbx","function":"its","groupcontact":"usitsdasdevopsadvisory","its-dcs-appid":"apm0001154","its-dcs-cms":"us-das","its-dcs-status":"provisioned","memberfirm":"us","primarycontact":"ylivshitz","status":"requested"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/c5f0c76d-57eb-4e0e-9b63-8db08aa28fcb.zip","runtime":"python310","maxInstances":3000,"ingressSettings":"ALLOW_ALL","buildId":"c8945e14-9dad-4e19-abda-fcaacb573f91","buildName":"projects/472625191829/locations/us-central1/builds/c8945e14-9dad-4e19-abda-fcaacb573f91","dockerRegistry":"CONTAINER_REGISTRY"},{"name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/function-2","httpsTrigger":{"url":"https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/function-2","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"hello_world","timeout":"540s","availableMemoryMb":1024,"serviceAccountEmail":"us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com","updateTime":"2022-09-18T19:58:56.674Z","versionId":"12","labels":{"deployment-tool":"console-cloud","appid":"apm0001154","billingcode":"tpt00798-05-00-01-5137","businessarea":"deloitteapplicationstudios","cms":"us-das","country":"us","csclass":"confidential","csqual":"intellectual-property","cstype":"deloitte","description":"document-will-be-uploaded-from-a-storage","environment":"sbx","function":"its","groupcontact":"usitsdasdevopsadvisory","its-dcs-appid":"apm0001154","its-dcs-cms":"us-das","its-dcs-status":"provisioned","memberfirm":"us","primarycontact":"ylivshitz","status":"requested"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/78545c63-65a4-4725-9186-c51dda3a9ec1.zip","runtime":"python310","maxInstances":3000,"ingressSettings":"ALLOW_ALL","buildId":"6c7f79d8-866f-43f8-82ed-dc3b07801fa3","buildName":"projects/472625191829/locations/us-central1/builds/6c7f79d8-866f-43f8-82ed-dc3b07801fa3","dockerRegistry":"CONTAINER_REGISTRY"}]}
+[debug] [2022-09-19T04:10:42.312Z] GCFv1 function has a deprecated runtime: {
+  "name": "projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/function-1",
+  "httpsTrigger": {
+    "url": "https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/function-1",
+    "securityLevel": "SECURE_ALWAYS"
+  },
+  "status": "ACTIVE",
+  "entryPoint": "hello_world",
+  "timeout": "540s",
+  "availableMemoryMb": 1024,
+  "serviceAccountEmail": "us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com",
+  "updateTime": "2022-09-14T11:51:27.912Z",
+  "versionId": "10",
+  "labels": {
+    "deployment-tool": "console-cloud",
+    "appid": "apm0001154",
+    "billingcode": "tpt00798-05-00-01-5137",
+    "businessarea": "deloitteapplicationstudios",
+    "cms": "us-das",
+    "country": "us",
+    "csclass": "confidential",
+    "csqual": "intellectual-property",
+    "cstype": "deloitte",
+    "description": "document-will-be-uploaded-from-a-storage",
+    "environment": "sbx",
+    "function": "its",
+    "groupcontact": "usitsdasdevopsadvisory",
+    "its-dcs-appid": "apm0001154",
+    "its-dcs-cms": "us-das",
+    "its-dcs-status": "provisioned",
+    "memberfirm": "us",
+    "primarycontact": "ylivshitz",
+    "status": "requested"
+  },
+  "sourceUploadUrl": "https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/c5f0c76d-57eb-4e0e-9b63-8db08aa28fcb.zip",
+  "runtime": "python310",
+  "maxInstances": 3000,
+  "ingressSettings": "ALLOW_ALL",
+  "buildId": "c8945e14-9dad-4e19-abda-fcaacb573f91",
+  "buildName": "projects/472625191829/locations/us-central1/builds/c8945e14-9dad-4e19-abda-fcaacb573f91",
+  "dockerRegistry": "CONTAINER_REGISTRY"
+}
+[debug] [2022-09-19T04:10:42.313Z] GCFv1 function has a deprecated runtime: {
+  "name": "projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/function-2",
+  "httpsTrigger": {
+    "url": "https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/function-2",
+    "securityLevel": "SECURE_ALWAYS"
+  },
+  "status": "ACTIVE",
+  "entryPoint": "hello_world",
+  "timeout": "540s",
+  "availableMemoryMb": 1024,
+  "serviceAccountEmail": "us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com",
+  "updateTime": "2022-09-18T19:58:56.674Z",
+  "versionId": "12",
+  "labels": {
+    "deployment-tool": "console-cloud",
+    "appid": "apm0001154",
+    "billingcode": "tpt00798-05-00-01-5137",
+    "businessarea": "deloitteapplicationstudios",
+    "cms": "us-das",
+    "country": "us",
+    "csclass": "confidential",
+    "csqual": "intellectual-property",
+    "cstype": "deloitte",
+    "description": "document-will-be-uploaded-from-a-storage",
+    "environment": "sbx",
+    "function": "its",
+    "groupcontact": "usitsdasdevopsadvisory",
+    "its-dcs-appid": "apm0001154",
+    "its-dcs-cms": "us-das",
+    "its-dcs-status": "provisioned",
+    "memberfirm": "us",
+    "primarycontact": "ylivshitz",
+    "status": "requested"
+  },
+  "sourceUploadUrl": "https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/78545c63-65a4-4725-9186-c51dda3a9ec1.zip",
+  "runtime": "python310",
+  "maxInstances": 3000,
+  "ingressSettings": "ALLOW_ALL",
+  "buildId": "6c7f79d8-866f-43f8-82ed-dc3b07801fa3",
+  "buildName": "projects/472625191829/locations/us-central1/builds/6c7f79d8-866f-43f8-82ed-dc3b07801fa3",
+  "dockerRegistry": "CONTAINER_REGISTRY"
+}
+[debug] [2022-09-19T04:10:42.314Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2alpha/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions [none]
+[debug] [2022-09-19T04:10:43.586Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2alpha/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions 200
+[debug] [2022-09-19T04:10:43.586Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2alpha/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/-/functions {}
+[debug] [2022-09-19T04:10:43.595Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 [none]
+[debug] [2022-09-19T04:10:44.532Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 200
+[debug] [2022-09-19T04:10:44.532Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/us-gcp-ame-its-gbhqe-sbx-1 {"projectId":"us-gcp-ame-its-gbhqe-sbx-1","projectNumber":"472625191829","displayName":"us-gcp-ame-its-gbhqe-sbx-1","name":"projects/us-gcp-ame-its-gbhqe-sbx-1","resources":{"hostingSite":"us-gcp-ame-its-gbhqe-sbx-1","realtimeDatabaseInstance":"us-gcp-ame-its-gbhqe-sbx-1-default-rtdb","storageBucket":"us-gcp-ame-its-gbhqe-sbx-1.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_9ab11d33-a9c4-4de4-a648-dcdbca1142e0"}
+[debug] [2022-09-19T04:10:44.533Z] [functions] found 1 new HTTP functions, testing setIamPolicy permission...
+[debug] [2022-09-19T04:10:44.534Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions [none]
+[debug] [2022-09-19T04:10:44.534Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions x-goog-quota-user=projects/us-gcp-ame-its-gbhqe-sbx-1
+[debug] [2022-09-19T04:10:44.534Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2022-09-19T04:10:45.413Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions 200
+[debug] [2022-09-19T04:10:45.413Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1:testIamPermissions {"permissions":["cloudfunctions.functions.setIamPolicy"]}
+[debug] [2022-09-19T04:10:45.413Z] [functions] found setIamPolicy permission, proceeding with deploy
+[debug] [2022-09-19T04:10:45.414Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2022-09-19T04:10:45.414Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions:generateUploadUrl {}
+[debug] [2022-09-19T04:10:46.821Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2022-09-19T04:10:46.821Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D"}
+[debug] [2022-09-19T04:10:46.822Z] >>> [apiv2][query] PUT https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip GoogleAccessId=service-472625191829%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D
+[debug] [2022-09-19T04:10:46.822Z] >>> [apiv2][body] PUT https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip [stream]
+[debug] [2022-09-19T04:10:48.451Z] <<< [apiv2][status] PUT https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip 200
+[debug] [2022-09-19T04:10:48.451Z] <<< [apiv2][body] PUT https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip [omitted]
+[info] +  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 16 function helloWorld(us-central1)... 
+[debug] [2022-09-19T04:10:48.457Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions [none]
+[debug] [2022-09-19T04:10:48.457Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions {"name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","entryPoint":"helloWorld","runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY","labels":{"deployment-tool":"cli-firebase"},"httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"}}
+[debug] [2022-09-19T04:10:49.852Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions 200
+[debug] [2022-09-19T04:10:49.852Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:49Z"}}
+[debug] [2022-09-19T04:10:49.853Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:10:50.809Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:10:50.809Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z"}}
+[debug] [2022-09-19T04:10:51.311Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:10:51.311Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:10:52.307Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:10:52.307Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:10:53.308Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:10:53.308Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:10:54.278Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:10:54.278Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:10:56.281Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:10:56.281Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:10:57.289Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:10:57.290Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:01.290Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:01.290Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:02.219Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:02.219Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:10.220Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:10.220Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:11.186Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:11.186Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:21.187Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:21.187Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:22.131Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:22.131Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:32.133Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:32.133Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:33.087Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:33.089Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:43.089Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:43.089Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:44.071Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:44.071Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:54.073Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:11:54.073Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:11:55.081Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:11:55.082Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","sourceToken":"1ef8fafe-00a1-40f9-bb08-767ef9dee811","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:11:55.082Z] Got source token 1ef8fafe-00a1-40f9-bb08-767ef9dee811 for region us-central1
+[debug] [2022-09-19T04:12:05.083Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:12:05.083Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:12:06.052Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:12:06.052Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:10:50Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","sourceToken":"1ef8fafe-00a1-40f9-bb08-767ef9dee811","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"}}
+[debug] [2022-09-19T04:12:06.052Z] Got source token 1ef8fafe-00a1-40f9-bb08-767ef9dee811 for region us-central1
+[debug] [2022-09-19T04:12:16.053Z] [create-default-us-central1-helloWorld] Retrying task index 0
+[debug] [2022-09-19T04:12:16.053Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw [none]
+[debug] [2022-09-19T04:12:17.037Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw 200
+[debug] [2022-09-19T04:12:17.038Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw {"name":"operations/dXMtZ2NwLWFtZS1pdHMtZ2JocWUtc2J4LTEvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9saTQ0YzVUTDRoYw","metadata":{"@type":"type.googleapis.com/google.cloud.functions.v1.OperationMetadataV1","target":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","type":"CREATE_FUNCTION","request":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"entryPoint":"helloWorld","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip?GoogleAccessId=service-472625191829@gcf-admin-robot.iam.gserviceaccount.com&Expires=1663562446&Signature=b0evUnDcGlnOKQOfsEPt6rgd%2B824lDSWUive7nWERLkbkO2Y68oiwyOr2lOw%2BYLTCnAlg1ZgAbuTc9n9S6XqfHvEijoK2oZ2e6UEFtVLEl9E9pWFQSc0CHmvG2gSWbSizvkJA7KllANbqV5mmg2NGf%2Ffw04yZ3qmSSoXADGWiLLDlrOswMs4rAbphVbfo%2FbCXxHxiqPJbOZZgy8zQS4fgh0pcBxkyfU%2BLz15q4CP07bKHXDnDbndMu5AtS3KiCfiQgQfdYfo%2FKNYnEbnkbMfKnNre%2BLyIPCQRDppJT3xrIg1o5jfTx6L%2F7irn2T01ddTAkgX%2FXgaYorWEcuLh73A%2Fg%3D%3D","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY"},"versionId":"1","updateTime":"2022-09-19T04:12:11Z","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","sourceToken":"1ef8fafe-00a1-40f9-bb08-767ef9dee811","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373"},"done":true,"response":{"@type":"type.googleapis.com/google.cloud.functions.v1.CloudFunction","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld","httpsTrigger":{"url":"https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/helloWorld","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"helloWorld","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"us-gcp-ame-its-gbhqe-sbx-1@appspot.gserviceaccount.com","updateTime":"2022-09-19T04:12:11.461Z","versionId":"1","labels":{"deployment-tool":"cli-firebase"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-925646347184.us-central1.cloudfunctions.appspot.com/91221316-9419-4667-acce-e927787eefb3.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}","GCLOUD_PROJECT":"us-gcp-ame-its-gbhqe-sbx-1"},"runtime":"nodejs16","ingressSettings":"ALLOW_ALL","buildId":"cd1276a9-1c34-4f3e-87af-1817904db373","buildName":"projects/472625191829/locations/us-central1/builds/cd1276a9-1c34-4f3e-87af-1817904db373","dockerRegistry":"ARTIFACT_REGISTRY"}}
+[debug] [2022-09-19T04:12:17.038Z] Got source token 1ef8fafe-00a1-40f9-bb08-767ef9dee811 for region us-central1
+[debug] [2022-09-19T04:12:17.039Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld:setIamPolicy [none]
+[debug] [2022-09-19T04:12:17.039Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld:setIamPolicy {"policy":{"bindings":[{"role":"roles/cloudfunctions.invoker","members":["allUsers"]}],"etag":"","version":3},"updateMask":"bindings,etag,version"}
+[debug] [2022-09-19T04:12:18.117Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld:setIamPolicy 400
+[debug] [2022-09-19T04:12:18.117Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld:setIamPolicy {"error":{"code":400,"message":"One or more users named in the policy do not belong to a permitted customer.","status":"FAILED_PRECONDITION","details":[{"@type":"type.googleapis.com/google.rpc.PreconditionFailure","violations":[{"type":"constraints/iam.allowedPolicyMemberDomains","subject":"orgpolicy:us-gcp-ame-its-gbhqe-sbx-1/us-central1/helloWorld?configvalue=allUsers","description":"User allUsers is not in permitted organization."}]}]}}
+[error] Failed to set the IAM Policy on the function projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld
+[debug] [2022-09-19T04:12:18.128Z] Total Function Deployment time: 89664
+[debug] [2022-09-19T04:12:18.128Z] 1 Functions Deployed
+[debug] [2022-09-19T04:12:18.129Z] 1 Functions Errored
+[debug] [2022-09-19T04:12:18.129Z] 0 Function Deployments Aborted
+[debug] [2022-09-19T04:12:18.129Z] Average Function Deployment time: 89662
+[info] 
+[info] Functions deploy had errors with the following functions:
+	helloWorld(us-central1)
+[info] 
+[info] Unable to set the invoker for the IAM policy on the following functions:
+	helloWorld(us-central1)
+[info] 
+[info] Some common causes of this:
+[info] 
+[info] - You may not have the roles/functions.admin IAM role. Note that roles/functions.developer does not allow you to change IAM policies.
+[info] 
+[info] - An organization policy that restricts Network Access on your project.
+[info] 
+[info] One or more functions were being implicitly made publicly available on function create.
+[info] Functions are not implicitly made public on updates. To try to make these functions public on next deploy, configure these functions with invoker set to "public"
+[info] Function URL (helloWorld(us-central1)): https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/helloWorld
+[info] i  functions: cleaning up build files... 
+[debug] [2022-09-19T04:12:19.081Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/repositories/gcf-artifacts/packages/hello_world [none]
+[debug] [2022-09-19T04:12:19.082Z] >>> [apiv2][query] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/tags/list [none]
+[debug] [2022-09-19T04:12:20.247Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/repositories/gcf-artifacts/packages/hello_world 200
+[debug] [2022-09-19T04:12:20.248Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/repositories/gcf-artifacts/packages/hello_world {"name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/operations/ba21f7ca-259b-4dd0-9b35-7c0dfbeb74e7","metadata":{"@type":"type.googleapis.com/google.devtools.artifactregistry.v1beta2.OperationMetadata"}}
+[debug] [2022-09-19T04:12:20.248Z] >>> [apiv2][query] GET https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/operations/ba21f7ca-259b-4dd0-9b35-7c0dfbeb74e7 [none]
+[debug] [2022-09-19T04:12:20.402Z] <<< [apiv2][status] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/tags/list 200
+[debug] [2022-09-19T04:12:20.402Z] <<< [apiv2][body] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/tags/list {"child":["56bd90ab-d050-4ca0-9ffc-411cf8c3b0d9","6d8ac4ce-26de-4ce0-aa52-359bbe11dfa0"],"manifest":{},"name":"us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1","tags":[]}
+[debug] [2022-09-19T04:12:20.404Z] >>> [apiv2][query] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/56bd90ab-d050-4ca0-9ffc-411cf8c3b0d9/tags/list [none]
+[debug] [2022-09-19T04:12:20.405Z] >>> [apiv2][query] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/6d8ac4ce-26de-4ce0-aa52-359bbe11dfa0/tags/list [none]
+[debug] [2022-09-19T04:12:21.191Z] <<< [apiv2][status] GET https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/operations/ba21f7ca-259b-4dd0-9b35-7c0dfbeb74e7 200
+[debug] [2022-09-19T04:12:21.192Z] <<< [apiv2][body] GET https://artifactregistry.googleapis.com/v1beta2/projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/operations/ba21f7ca-259b-4dd0-9b35-7c0dfbeb74e7 {"name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/operations/ba21f7ca-259b-4dd0-9b35-7c0dfbeb74e7","metadata":{"@type":"type.googleapis.com/google.devtools.artifactregistry.v1beta2.OperationMetadata"},"done":true,"response":{"@type":"type.googleapis.com/google.devtools.artifactregistry.v1beta2.Package","name":"projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/repositories/gcf-artifacts/packages/hello_world"}}
+[debug] [2022-09-19T04:12:21.447Z] <<< [apiv2][status] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/56bd90ab-d050-4ca0-9ffc-411cf8c3b0d9/tags/list 200
+[debug] [2022-09-19T04:12:21.447Z] <<< [apiv2][body] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/56bd90ab-d050-4ca0-9ffc-411cf8c3b0d9/tags/list {"child":["cache"],"manifest":{"sha256:6479da28b360f6fbf8b63e904229b2907a5b8b04363b274fbaabae72c3394f9b":{"imageSizeBytes":"234058653","layerId":"","mediaType":"application/vnd.docker.distribution.manifest.v2+json","tag":["function-1_version-9"],"timeCreatedMs":"315532801000","timeUploadedMs":"1663152424363"},"sha256:6d2a109db6e9e13a3af9a3bcc748a363cab0953a60a0571b8915ecd6830383bd":{"imageSizeBytes":"234058741","layerId":"","mediaType":"application/vnd.docker.distribution.manifest.v2+json","tag":["function-1_version-10","latest"],"timeCreatedMs":"315532801000","timeUploadedMs":"1663156247753"}},"name":"us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/56bd90ab-d050-4ca0-9ffc-411cf8c3b0d9","tags":["function-1_version-10","function-1_version-9","latest"]}
+[debug] [2022-09-19T04:12:21.451Z] <<< [apiv2][status] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/6d8ac4ce-26de-4ce0-aa52-359bbe11dfa0/tags/list 200
+[debug] [2022-09-19T04:12:21.451Z] <<< [apiv2][body] GET https://us.gcr.io/v2/us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/6d8ac4ce-26de-4ce0-aa52-359bbe11dfa0/tags/list {"child":["cache"],"manifest":{"sha256:0852229943710789a5f5913b0cd1efcad0fee5d08bfe0b4c34a1ac0e2ae63381":{"imageSizeBytes":"235235239","layerId":"","mediaType":"application/vnd.docker.distribution.manifest.v2+json","tag":["function-2_version-11"],"timeCreatedMs":"315532801000","timeUploadedMs":"1663334463349"},"sha256:a5fe519bcd18b5fab183004b91bc9ac6af74e72c579d29820f501205fd830fd9":{"imageSizeBytes":"236310789","layerId":"","mediaType":"application/vnd.docker.distribution.manifest.v2+json","tag":["function-2_version-12","latest"],"timeCreatedMs":"315532801000","timeUploadedMs":"1663531109026"}},"name":"us-gcp-ame-its-gbhqe-sbx-1/gcf/us-central1/6d8ac4ce-26de-4ce0-aa52-359bbe11dfa0","tags":["function-2_version-11","function-2_version-12","latest"]}
+[debug] [2022-09-19T04:12:21.452Z] Could not find image for function projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld
+[debug] [2022-09-19T04:12:21.452Z] Functions deploy failed.
+[debug] [2022-09-19T04:12:21.452Z] {
+  "endpoint": {
+    "id": "helloWorld",
+    "project": "us-gcp-ame-its-gbhqe-sbx-1",
+    "region": "us-central1",
+    "entryPoint": "helloWorld",
+    "platform": "gcfv1",
+    "runtime": "nodejs16",
+    "httpsTrigger": {},
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"us-gcp-ame-its-gbhqe-sbx-1\",\"databaseURL\":\"https://us-gcp-ame-its-gbhqe-sbx-1-default-rtdb.firebaseio.com\",\"storageBucket\":\"us-gcp-ame-its-gbhqe-sbx-1.appspot.com\",\"locationId\":\"us-central\"}",
+      "GCLOUD_PROJECT": "us-gcp-ame-its-gbhqe-sbx-1"
+    },
+    "codebase": "default",
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "uri": "https://us-central1-us-gcp-ame-its-gbhqe-sbx-1.cloudfunctions.net/helloWorld"
+  },
+  "op": "set invoker",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "exit": 1,
+    "message": "Failed to set the IAM Policy on the function projects/us-gcp-ame-its-gbhqe-sbx-1/locations/us-central1/functions/helloWorld",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "One or more users named in the policy do not belong to a permitted customer.",
+            "status": "FAILED_PRECONDITION",
+            "details": [
+              {
+                "@type": "type.googleapis.com/google.rpc.PreconditionFailure",
+                "violations": [
+                  {
+                    "type": "constraints/iam.allowedPolicyMemberDomains",
+                    "subject": "orgpolicy:us-gcp-ame-its-gbhqe-sbx-1/us-central1/helloWorld?configvalue=allUsers",
+                    "description": "User allUsers is not in permitted organization."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "HTTP Error: 400, One or more users named in the policy do not belong to a permitted customer.",
+      "status": 400
+    },
+    "status": 500
+  }
+}
+[debug] [2022-09-19T04:12:22.240Z] Error: Failed to set invoker function helloWorld in region us-central1
+    at D:\Users\pankajagrawal2\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:42:11
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Fabricator.createV1Function (D:\Users\pankajagrawal2\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:182:17)
+    at async Fabricator.createEndpoint (D:\Users\pankajagrawal2\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:123:13)
+    at async handle (D:\Users\pankajagrawal2\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:79:17)
+[error] 
+[error] Error: There was an error deploying functions

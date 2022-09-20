@@ -18,33 +18,82 @@ export class FileUploadComponent {
 	@ViewChild('fileInput') fileInputVariable: ElementRef;
 	uploadButton: string = MessageConstant.UPLOAD_BUTTON;
 	file = null;
-	tableData:IfileContentJson[]
+	tableData: IfileContentJson[]
 	selectedFiles: any;
 	currentFileUpload: FileUpload;
 	percentage: number;
-	isPreElementCss:boolean = false;
+	isPreElementCss: boolean = false;
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
-	isLoading:boolean = false;
+	isLoading: boolean = false;
+	uploadedFileName: string;
 
 	constructor(
-		private fileUploadService: FileUploadService, 
+		private fileUploadService: FileUploadService,
 		private commonService: CommonService,
 		private storage: AngularFireStorage
-	) { 
-		
+	) {
+
 	}
 
-	callApi(){
-		const fileName = 'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf';
-		this.fileUploadService.uploadFileApi('function-1').subscribe((res)=>{
+	getToken(){
+		//client id = 472625191829-u1j8rfstkc2veqeascudgighhu4cvg23.apps.googleusercontent.com
+		//client secret = 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
+		//url = // https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o
+		//url = // https://www.googleapis.com/auth/analytics
+		//url = // https://www.googleapis.com/auth/documents
+		//url = // https://www.googleapis.com/oauth2/v1/token
+		//url = // https://us-gcp-ame-its-gbhqe-sbx-1.firebaseapp.com
+
+		// var requestOptions: any = {
+		// 	method: 'POST',
+		// 	// headers: myHeaders,
+		// 	body: {key:'472625191829-u1j8rfstkc2veqeascudgighhu4cvg23.apps.googleusercontent.com',value:'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'},
+			
+		// };
+
+		// fetch("https://www.googleapis.com/oauth2/v1/token", requestOptions)
+		// 	.then(response => response.text())
+		// 	.then(result => console.log(result))
+		// 	.catch(error => console.log('error', error));
+
+		//https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=472625191829-u1j8rfstkc2veqeascudgighhu4cvg23.apps.googleusercontent.com&redirect_uri=http://localhost:5000'
+
+		let url = "https://accounts.google.com/o/oauth2/v2/auth";
+		let client_secret = "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";
+		let client_id = "472625191829-u1j8rfstkc2veqeascudgighhu4cvg23.apps.googleusercontent.com";
+		let redirect_uri = "http://localhost:5000";
+		let response_type="code&";
+		let request = new XMLHttpRequest();
+		request.open("POST",url,true);
+		request.setRequestHeader("Content-type","application/json");
+		request.send("response_type="+response_type+"client_id="+client_id+"&client_secret="+client_secret+"&redirect_uri="+redirect_uri);
+		// request.send("client_id="+client_id+"&"+"client_secret="+client_secret);
+		request.onreadystatechange = function(){
+			if(request.readyState == request.DONE){
+				let response = request.responseText;
+				// let obj = JSON.parse(response);
+				console.log(response);
+			}
+		}
+	}
+
+	callApi() {
+		// const fileName = 'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf';
+		this.fileUploadService.uploadFileApi(this.uploadedFileName).subscribe((res)=>{
 			console.log('new api res',res); 
-		})
+			this.hideLoader();
+		let result:any = Object.keys(res).map(key => ({ category: key, value: res[key] }));
+			if (result.length) this.setTableData(result);
+		});
+
+		// let res:any = {"Agreement Date":["September 26, 2018",83.17562695687832]}
+		// let result:any = Object.keys(res).map(key => ({ category: key, value: res[key] }));
+		// 	if (result.length) this.setTableData(result);
 	}
 
 	//on file change
-	uploadedFileName:string
 	onChange(event: any) {
-		this.file = event.target;  
+		this.file = event.target;
 		this.loadPlainFile();
 		this.selectedFiles = event.target.files;
 		this.uploadedFileName = this.selectedFiles[0].name;
@@ -65,63 +114,69 @@ export class FileUploadComponent {
 		this.fileUploadService.pushFileToStorage(this.currentFileUpload).subscribe(
 			(percentage: any) => {
 				this.percentage = Math.round(percentage);
-				if(this.percentage == 100){
+				if (this.percentage == 100) {
 					this.showToastMessage();
 					this.reset();
 					this.showLoader();
 					// this.hideLoader();
 					// this.getResponseFileUrl();
-				} 
+					this.callApi();
+				}
 			},
 			error => {
 				this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.fail);
 				this.reset();
 				console.log(error);
 			}
-		); 
+		);
 	}
 
-	showToastMessage(){
+	showToastMessage() {
 		this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
 	}
 
-	reset(){
+	reset() {
 		this.fileInputVariable.nativeElement.value = null;
 		this.file = null
 	}
 
-	showLoader(){
-		setTimeout(()=>{
+	showLoader() {
+		setTimeout(() => {
 			this.isLoading = true;
-			this.getResponseFileUrl();
-		},1500);
+			// this.getResponseFileUrl();
+		}, 1500);
 	}
 
-	hideLoader(){
+	hideLoader() {
 		this.isLoading = false;
 	}
 
 	//get response file url
-	getResponseFileUrl(){
-		let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
-		fileName = fileName + UrlConstant.FILENAME_SUFFIX;
-		const filePath:string = UrlConstant.UPLOAD_FILE_CHILDPATH +'/'+ fileName;
+	getResponseFileUrl() {
+		// this.showLoader();
+		// let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
+		// fileName = fileName + UrlConstant.FILENAME_SUFFIX;
+
+		const fileName = 'predictions_.json';
+		const filePath: string = UrlConstant.UPLOAD_FILE_CHILDPATH + '/' + fileName;
 		this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
 			this.getResponseFileContent(url);
 		},
-		(error)=>{
-			setTimeout(()=>{
-				this.getResponseFileUrl();
-			},15000);
-		});
+			(error) => {
+				setTimeout(() => {
+					this.getResponseFileUrl();
+				}, 15000);
+			});
 	}
 
 	//get content for table
-	getResponseFileContent(url:string){
-		this.fileUploadService.getResponseFileContent(url).subscribe((res:any)=>{
+	getResponseFileContent(url: string) {
+		this.fileUploadService.getResponseFileContent(url).subscribe((res: any) => {
 			//working
-			let result = Object.keys(res).map(key => ({category: key, value: res[key]}));
-			if(result.length) this.setTableData(result);
+			this.hideLoader();
+			console.log('res',res);
+			let result = Object.keys(res).map(key => ({ category: key, value: res[key] }));
+			if (result.length) this.setTableData(result);
 			//working
 
 			// let result = Object.keys(res).map(key => ({id: key, category:res[key], value: res[key]}));
@@ -137,7 +192,7 @@ export class FileUploadComponent {
 	}
 
 	//pass data to table component
-	setTableData(data:IfileContentJson[]) {
+	setTableData(data: IfileContentJson[]) {
 		this.tableData = data;
 		this.hideLoader();
 		//test code start
@@ -150,17 +205,17 @@ export class FileUploadComponent {
 	}
 
 	//set uploaded file data in textarea
-	loadPlainFile(){
+	loadPlainFile() {
 		let input = document.querySelector('input');
-		let textArea:any = document.querySelector('textarea');
+		let textArea: any = document.querySelector('textarea');
 
-		let files:any = input?.files;
+		let files: any = input?.files;
 		const file = files[0];
-		if(files?.length == 0) return;
+		if (files?.length == 0) return;
 
 		let reader = new FileReader();
-		reader.onload = (e) =>{
-			const file:any = e.target?.result;
+		reader.onload = (e) => {
+			const file: any = e.target?.result;
 			const lines = file.split(/\r\n|\n/);
 			textArea.value = lines.join('\n');
 		};
@@ -170,15 +225,15 @@ export class FileUploadComponent {
 	}
 
 	//get textarea content
-	getPlainFileContent(){
-		let content:any = document.querySelector('textarea')?.value;
+	getPlainFileContent() {
+		let content: any = document.querySelector('textarea')?.value;
 		this.setPreElementContent(content);
 	}
 
 	//set content for pre element
-	setPreElementContent(content:any){
+	setPreElementContent(content: any) {
 		let preElement = document.getElementById('pre-element') as HTMLInputElement;
-	    preElement.innerHTML = content;
+		preElement.innerHTML = content;
 		this.isPreElementCss = true;
 		this.convertPlainTextToHighlightedText(preElement);
 	}
@@ -187,7 +242,7 @@ export class FileUploadComponent {
 	convertPlainTextToHighlightedText(preElement: any) {
 		let contentJson = this.tableData;
 		contentJson.forEach((item: IfileContentJson, i: number) => {
-		  preElement.innerHTML = preElement.innerHTML.replace(item.value, '<span style="background:yellow" id="'+item.category+i+'" title="'+item.category+'">'+item.value+'</span>')
+			preElement.innerHTML = preElement.innerHTML.replace(item.value[0], '<span style="background:yellow" id="' + item.category + i + '" title="' + item.category + '">' + item.value[0] + '</span>')
 		});
 		// this.deleteThis()
 		// test code start 
@@ -205,15 +260,15 @@ export class FileUploadComponent {
 		this.fileUploadService.exportFile(preElement);
 	}
 
-	deleteThis(){
+	deleteThis() {
 		var csv = document.getElementById('pre-element') as HTMLInputElement;
-		var data = new Blob(['\ufeff',csv?.innerHTML]);
+		var data = new Blob(['\ufeff', csv?.innerHTML]);
 		var a2 = document.getElementById("a2") as HTMLAnchorElement;
 		a2.href = URL.createObjectURL(data);
 	}
 
 	//category updated inside table
-	onCategoryUpdate(data:any){
+	onCategoryUpdate(data: any) {
 		const index = data.index;
 		const newCategory = data.newCategory;
 		this.tableData[index].category = newCategory;
@@ -226,7 +281,7 @@ export class FileUploadComponent {
 		this.saveActualPrediction(data);
 	}
 
-	saveActualPrediction(obj:any){
+	saveActualPrediction(obj: any) {
 		const url = "https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2FactualPrediction.json?alt=media&token=953f1c78-267f-4930-bcbe-b1d4a9a9f243";
 		const data = [
 			{
@@ -235,13 +290,13 @@ export class FileUploadComponent {
 				"text": obj.value
 			}
 		];
-		this.fileUploadService.replaceFileData(url,data).subscribe(res=>{
-			console.log('res',res);
+		this.fileUploadService.replaceFileData(url, data).subscribe(res => {
+			console.log('res', res);
 			this.temporaryUpdateResponseJsonFile(obj);
 		})
 	}
 
-	temporaryUpdateResponseJsonFile(obj:any){
+	temporaryUpdateResponseJsonFile(obj: any) {
 		// let responseJson = {
 		// 	"Document Name": "CO-PROMOTION AGREEMENT",
 		// 	"Parties": "Dova Pharmaceuticals, Inc., a Delaware corporation (\"Dova\"), and Valeant Pharmaceuticals North America LLC, a Delaware limited liability company (\"Valeant\"). Dova and Valeant are each referred to individually as a \"Party\" and together as the \"Parties\".",
@@ -280,7 +335,7 @@ export class FileUploadComponent {
 		// 	"Covenant Not To Sue": "During the Term, Valeant will not contest the ownership of the Dova Trademarks and Copyrights, their validity, or the validity of any registration therefor.",
 		// 	"Third Party Beneficiary": "Except as set forth in ARTICLE 11, no Person other than Dova or Valeant (and their respective Affiliates and permitted successors and assignees hereunder) shall be deemed an intended beneficiary hereunder or have any right to enforce any obligation of this Agreement."
 		// 	}
-		
+
 		let responseJson = [
 			{
 				"category": "test 1",
@@ -310,8 +365,8 @@ export class FileUploadComponent {
 		// str = str.replace('"'+obj.category+'"', obj.newCategory);
 		// let data = JSON.parse(str);
 		// this.fileUploadService.updateJsonFileData(url,data).subscribe(res=>{
-		this.fileUploadService.updateJsonFileData(url,responseJson).subscribe(res=>{
-			console.log('res',res);
+		this.fileUploadService.updateJsonFileData(url, responseJson).subscribe(res => {
+			console.log('res', res);
 		})
 	}
 }
