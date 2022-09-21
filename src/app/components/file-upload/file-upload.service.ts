@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, delay, finalize, retryWhen, take } from 'rxjs/operators'
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, delay, finalize, map, retryWhen, take } from 'rxjs/operators'
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
@@ -51,7 +51,8 @@ export class FileUploadService {
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
 		// const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
-		const filePath = `${this.basePath}/${fileUpload.file.name}`;
+		// const filePath = `${this.basePath}/${fileUpload.file.name}`;
+		const filePath = `${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(
@@ -92,14 +93,63 @@ export class FileUploadService {
 		storageRef.child(name).delete();
 	}
 
-	getResponseFileContent(url:string){
-		return this.http.get(url)
-			.pipe(
-				catchError((err) => {
-			  		return throwError(err);
-				})
-		  	)
-	}
+	// getResponseFileContent(url:string){
+	// 	return this.http.get(url)
+	// 		.pipe(
+	// 			map((res:any)=>{
+	// 				const data = res.map((obj:any)=>{
+	// 					JSON.parse(JSON.stringify(res));
+	// 				});
+	// 				return data;
+	// 			})
+	// 		)
+	// }
+
+	// getResponseFileContent(url:string){
+	// 	return this.http.get(url).pipe(
+	// 	  map((res: any) => {
+	// 		const data = res.map((obj:any) => ({
+	// 		  modifiedData: JSON.parse(JSON.stringify(obj))
+	// 		}));
+	// 		return data;
+	// 	  })
+	// 	);
+	//   }
+
+	getResponseFileContent(url:string) {
+		// const headers = { 'Access-Control-Request-Headers': 'Access-Control-Allow-Origin'};
+		// const headers = {
+		// 	'Access-Control-Allow-Origin':'http://localhost:4200/', 
+		// 	'Access-Control-Request-Headers': 'Content-Type', 
+		// 	'Access-Control-Allow-Methods':['GET','POST'],
+		// 	'Access-Control-Allow-Credentials':'true'
+		// };
+		const headers = {
+			"Access-Control-Allow-Origin": "*",
+        	"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS, DELETE",
+        	"Access-Control-Max-Age": "3600",
+        	"Access-Control-Allow-Headers": "x-requested-with, content-type"
+		}
+		// return this.http.get(url,{headers});
+		return this.http.get(url);
+						// .pipe(catchError(this.errorHandler));  
+	  }
+
+	  errorHandler(error: HttpErrorResponse) {
+		if (error.error instanceof ErrorEvent) {
+		  // A client-side or network error occurred. Handle it accordingly.
+		  console.error('An error occurred:', error.error.message);
+		} else {
+		  // The backend returned an unsuccessful response code.
+		  // The response body may contain clues as to what went wrong,
+		//   console.error(
+		// 	`Backend returned code ${error.status}, ` +
+		// 	`body was: ${error.error}`);
+		return throwError(error.error);
+		}
+		// return an observable with a user-facing error message
+		return throwError(error.error);
+	  }  
 
 	replaceFileData(url:string,data:any){
 		return this.http.post(url,data); 
@@ -151,4 +201,24 @@ export class FileUploadService {
 	// }
 
 	//api for file upload end
+
+	// test(){
+	// 	var myHeaders = new Headers();
+	// 	var url = 'https://firebasestorage.googleapis.com/v0/b/cuad-test/o/test.json?alt=media&token=cb7c3854-d709-4c5c-aa63-31e1cf1bc48a';
+	// 	myHeaders.append("Content-Type", "application/json");
+	// 	var raw = JSON.stringify({
+	// 		"message": ''
+	// 	});
+	// 	var requestOptions: any = {
+	// 		method: 'POST',
+	// 		headers: myHeaders,
+	// 		body: raw,
+	// 		mode: 'cors',
+	// 		redirect: 'follow'
+	// 	};
+	// 	fetch(url, requestOptions)
+	// 		.then(response => console.log(response))
+	// 		.then(result => console.log(result))
+	// 		.catch(error => console.log('error', error));
+	// }
 }

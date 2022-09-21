@@ -117,10 +117,11 @@ export class FileUploadComponent {
 				if (this.percentage == 100) {
 					this.showToastMessage();
 					this.reset();
-					this.showLoader();
+					// this.showLoader();
 					// this.hideLoader();
-					// this.getResponseFileUrl();
-					this.callApi();
+					this.getResponseFileUrl();
+					// this.callApi();
+					this.isLoading = true;
 				}
 			},
 			error => {
@@ -154,41 +155,29 @@ export class FileUploadComponent {
 	//get response file url
 	getResponseFileUrl() {
 		// this.showLoader();
-		// let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
-		// fileName = fileName + UrlConstant.FILENAME_SUFFIX;
-
-		const fileName = 'predictions_.json';
-		const filePath: string = UrlConstant.UPLOAD_FILE_CHILDPATH + '/' + fileName;
-		this.storage.ref(filePath).getDownloadURL().subscribe((url: string) => {
+		let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
+		fileName = fileName + UrlConstant.FILENAME_SUFFIX;
+		// const file1 = 'uploads/response.json'		//appspot.com
+		this.storage.ref(fileName).getDownloadURL().subscribe((url: string) => {
 			this.getResponseFileContent(url);
+			console.log('url-->',url)
+			// this.test(url);
 		},
 			(error) => {
 				setTimeout(() => {
 					this.getResponseFileUrl();
-				}, 15000);
+				}, 100000);
 			});
 	}
 
 	//get content for table
 	getResponseFileContent(url: string) {
-		this.fileUploadService.getResponseFileContent(url).subscribe((res: any) => {
-			//working
-			this.hideLoader();
-			console.log('res',res);
-			let result = Object.keys(res).map(key => ({ category: key, value: res[key] }));
-			if (result.length) this.setTableData(result);
-			//working
-
-			// let result = Object.keys(res).map(key => ({id: key, category:res[key], value: res[key]}));
-			// result.forEach((item,index)=>{
-			// 	if(item.value[0] !== '{}'){
-			// 		item.category = Object.keys(item.value[0])
-			// 		item.value = Object.values(item.value[0])
-			// 	}
-			// })
-			// console.log(result);
-			// this.setTableData(result);
-		});
+		this.fileUploadService.getResponseFileContent(url).subscribe((res) => {
+			console.log('data-->',res);
+			this.isLoading = false;
+			// let result = Object.keys(res).map(key => ({ category: key, value: res[key] }));
+			// if (result.length) this.setTableData(result);
+		}); 
 	}
 
 	//pass data to table component
@@ -368,5 +357,25 @@ export class FileUploadComponent {
 		this.fileUploadService.updateJsonFileData(url, responseJson).subscribe(res => {
 			console.log('res', res);
 		})
+	}
+
+	test(url:string){
+		var myHeaders = new Headers();
+		// var url = 'https://firebasestorage.googleapis.com/v0/b/cuad-test/o/test.json?alt=media&token=60329772-aa78-4cb1-be28-303ca2c3216e';
+		myHeaders.append("Content-Type", "application/json");
+		// myHeaders.append("Authorization", "Bearer " +  MessageConstant.BEARER_TOKEN);
+		var raw = JSON.stringify({
+			"message": ''
+		});
+		var requestOptions: any = {
+			method: 'GET',
+			headers: myHeaders,
+			mode: 'cors',
+			redirect: 'follow'
+		};
+		fetch(url, requestOptions)
+			.then(response => console.log('r1',response))
+			.then(result => console.log('r2',result))
+			.catch(error => console.log('r3', error));
 	}
 }
