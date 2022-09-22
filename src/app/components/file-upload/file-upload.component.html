@@ -1,18 +1,11 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input #fileInput class="form-control" accept=".txt,.json,.pdf" type="file" (change)="onChange($event)">
+			<input #fileInput class="form-control" accept=".txt,.pdf" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
-			<!-- <button mat-raised-button class="btn-color" (click)="test()">{{'call api'}}</button> -->
-			<!-- <button mat-raised-button class="btn-color" (click)="getToken()">{{'get token'}}</button> -->
-			<!-- <a id="a2" download="Download.doc" type="application/msword">Download doc (via Blob)</a> -->
 		</div> 
 	</div>
 </mat-card>
-<!-- <mat-spinner *ngIf="isLoading" class="progress-bar"></mat-spinner> -->
-<!-- <div [ngClass]="{'loader':isLoading}">
-	<mat-progress-bar *ngIf="isLoading" mode="indeterminate" class="progress-bar"></mat-progress-bar>
-</div> -->
 <div fxLayout="row" fxLayoutAlign="space-around center" [ngClass]="{'loader':isLoading}">
 	<mat-spinner *ngIf="isLoading" diameter="50" strokeWidth="5"></mat-spinner>
 </div>

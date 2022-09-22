@@ -32,8 +32,6 @@ export class FileUploadService {
 		// let html = preHtml + doc.value + postHtml;
 		let blob = new Blob(['\ufeff', html], { type: 'application/msword' });
 		let url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-		// let url = 'data:text/plain;charset=utf-8,' + encodeURIComponent(html);
-		// let url = 'data:application/octet-stream,' + encodeURIComponent(html);
 		fileName = fileName ? fileName + fileType : defaultFile;
 		let downloadLink = document.createElement("a");
 		document.body.appendChild(downloadLink);
@@ -51,7 +49,6 @@ export class FileUploadService {
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
 		// const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
-		// const filePath = `${this.basePath}/${fileUpload.file.name}`;
 		const filePath = `${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -93,63 +90,9 @@ export class FileUploadService {
 		storageRef.child(name).delete();
 	}
 
-	// getResponseFileContent(url:string){
-	// 	return this.http.get(url)
-	// 		.pipe(
-	// 			map((res:any)=>{
-	// 				const data = res.map((obj:any)=>{
-	// 					JSON.parse(JSON.stringify(res));
-	// 				});
-	// 				return data;
-	// 			})
-	// 		)
-	// }
-
-	// getResponseFileContent(url:string){
-	// 	return this.http.get(url).pipe(
-	// 	  map((res: any) => {
-	// 		const data = res.map((obj:any) => ({
-	// 		  modifiedData: JSON.parse(JSON.stringify(obj))
-	// 		}));
-	// 		return data;
-	// 	  })
-	// 	);
-	//   }
-
 	getResponseFileContent(url:string) {
-		// const headers = { 'Access-Control-Request-Headers': 'Access-Control-Allow-Origin'};
-		// const headers = {
-		// 	'Access-Control-Allow-Origin':'http://localhost:4200/', 
-		// 	'Access-Control-Request-Headers': 'Content-Type', 
-		// 	'Access-Control-Allow-Methods':['GET','POST'],
-		// 	'Access-Control-Allow-Credentials':'true'
-		// };
-		const headers = {
-			"Access-Control-Allow-Origin": "*",
-        	"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS, DELETE",
-        	"Access-Control-Max-Age": "3600",
-        	"Access-Control-Allow-Headers": "x-requested-with, content-type"
-		}
-		// return this.http.get(url,{headers});
-		return this.http.get(url);
-						// .pipe(catchError(this.errorHandler));  
-	  }
-
-	  errorHandler(error: HttpErrorResponse) {
-		if (error.error instanceof ErrorEvent) {
-		  // A client-side or network error occurred. Handle it accordingly.
-		  console.error('An error occurred:', error.error.message);
-		} else {
-		  // The backend returned an unsuccessful response code.
-		  // The response body may contain clues as to what went wrong,
-		//   console.error(
-		// 	`Backend returned code ${error.status}, ` +
-		// 	`body was: ${error.error}`);
-		return throwError(error.error);
-		}
-		// return an observable with a user-facing error message
-		return throwError(error.error);
-	  }  
+		return this.http.get(url);  
+	}
 
 	replaceFileData(url:string,data:any){
 		return this.http.post(url,data); 
@@ -158,67 +101,4 @@ export class FileUploadService {
 	updateJsonFileData(url:string,data:any){
 		return this.http.post(url,data); 
 	}
-
-	//api for file upload
-
-	//version 1 working
-	uploadFileApi(fileName:string): Observable<any>{
-		const url:string = UrlConstant.UPLOAD_FILE_URL;
-		const body = { message: fileName };
-		const token:string = MessageConstant.BEARER_TOKEN;
-		const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
-		return this.http.post(url,body,{headers})
-	}
-
-	//version 2 not working
-	// uploadFileApi(functionName:string){
-	// 	const callable = this.fireFunction.httpsCallable(functionName);
-	// 	return callable({message:'DovaPharmaceuticalsInc_20181108_10-Q_EX-10.2_11414857_EX-10.2_Promotion Agreement.pdf'})
-	// }
-
-	//version 3 working
-	// uploadFileApi(fileName:string){
-		// var myHeaders = new Headers();
-		// myHeaders.append("Authorization", "Bearer " +  MessageConstant.BEARER_TOKEN);
-		// myHeaders.append("Content-Type", "application/json");
-		// // myHeaders.append('Access-Control-Allow-Origin', 'https://us-gcp-ame-its-gbhqe-sbx-1.uc.r.appspot.com')
-
-		// var raw = JSON.stringify({
-		// 	"message": fileName
-		// });
-
-		// var requestOptions: any = {
-		// 	method: 'POST',
-		// 	headers: myHeaders,
-		// 	body: raw,
-		// 	redirect: 'follow'
-		// };
-
-		// fetch(UrlConstant.UPLOAD_FILE_URL + "?message=" + fileName + "&=", requestOptions)
-		// 	.then(response => response.text())
-		// 	.then(result => console.log(result))
-		// 	.catch(error => console.log('error', error));
-	// }
-
-	//api for file upload end
-
-	// test(){
-	// 	var myHeaders = new Headers();
-	// 	var url = 'https://firebasestorage.googleapis.com/v0/b/cuad-test/o/test.json?alt=media&token=cb7c3854-d709-4c5c-aa63-31e1cf1bc48a';
-	// 	myHeaders.append("Content-Type", "application/json");
-	// 	var raw = JSON.stringify({
-	// 		"message": ''
-	// 	});
-	// 	var requestOptions: any = {
-	// 		method: 'POST',
-	// 		headers: myHeaders,
-	// 		body: raw,
-	// 		mode: 'cors',
-	// 		redirect: 'follow'
-	// 	};
-	// 	fetch(url, requestOptions)
-	// 		.then(response => console.log(response))
-	// 		.then(result => console.log(result))
-	// 		.catch(error => console.log('error', error));
-	// }
 }
