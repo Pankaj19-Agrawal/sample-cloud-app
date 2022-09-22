@@ -37,10 +37,18 @@ export class FileUploadComponent {
 
 	onChange(event: any) {
 		this.file = event.target;
-		this.loadPlainFile();
 		this.selectedFiles = event.target.files;
 		this.uploadedFileName = this.selectedFiles[0].name;
 		this.uploadedFileName.substring(0, this.uploadedFileName.length - 4)
+		this.checkFileType(this.selectedFiles[0].type);
+	}
+
+	checkFileType(fileType:string){
+		if(fileType === 'text/plain'){
+			this.loadPlainFile();
+		}else{
+			//load pdf file
+		}
 	}
 
 	onUpload() {
@@ -51,10 +59,10 @@ export class FileUploadComponent {
 			(percentage: any) => {
 				this.percentage = Math.round(percentage);
 				if (this.percentage == 100) {
-					this.showToastMessage();
+					this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
 					this.reset();
-					this.getResponseFileUrl();
 					this.isLoading = true;
+					setTimeout(()=>{this.getResponseFileUrl()},1000);
 				}
 			},
 			error => {
@@ -65,25 +73,13 @@ export class FileUploadComponent {
 		);
 	}
 
-	showToastMessage() {
-		this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
-	}
-
 	reset() {
 		this.fileInputVariable.nativeElement.value = null;
 		this.file = null
 	}
 
-	showLoader() {
-		this.isLoading = true;
-	}
-
-	hideLoader() {
-		this.isLoading = false;
-	}
-
 	getResponseFileUrl() {
-		let fileName = this.uploadedFileName.substring(0, this.uploadedFileName.length - 4);
+		let fileName = this.fileUploadService.getFileNameWithStamp();
 		fileName = fileName + UrlConstant.FILENAME_SUFFIX;
 		// const file1 = 'uploads/response.json'		//appspot.com
 		this.storage.ref(fileName).getDownloadURL().subscribe((url: string) => {
@@ -92,21 +88,20 @@ export class FileUploadComponent {
 			(error) => {
 				setTimeout(() => {
 					this.getResponseFileUrl();
-				}, 100000);
+				}, 60000);
 			});
 	}
 
 	getResponseFileContent(url: string) {
 		this.fileUploadService.getResponseFileContent(url).subscribe((res:any) => {
-			this.isLoading = false;
 			let result = Object.keys(res).map(key => ({ category: key, value: res[key] }));
 			if (result.length) this.setTableData(result);
 		}); 
 	}
 
 	setTableData(data: IfileContentJson[]) {
+		this.isLoading = false;
 		this.tableData = data;
-		this.hideLoader();
 		this.getPlainFileContent();
 	}
 

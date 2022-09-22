@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 
 export class FileUploadService {
 	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;
+	fileNameWithStamp:string;
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
@@ -48,8 +49,7 @@ export class FileUploadService {
 
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
-		// const filePath = `${this.basePath}/${timestamp + fileUpload.file.name}`;
-		const filePath = `${fileUpload.file.name}`;
+		const filePath = `${timestamp + fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(
@@ -65,8 +65,18 @@ export class FileUploadService {
 	}
 
 	private saveFileData(fileUpload: FileUpload): void {
-		console.log('2',fileUpload)
+		this.setFileUploadUrl(fileUpload.url);
 		this.db.list(this.basePath).push(fileUpload);
+	}
+
+	setFileUploadUrl(url:string){
+		const arr = url.split('/o/');
+		const newArr = arr[1].split('.pdf?')
+		this.fileNameWithStamp = newArr[0];
+	}
+
+	getFileNameWithStamp(){
+		return this.fileNameWithStamp;
 	}
 
 	getFiles(numberItems:any): AngularFireList<FileUpload> {
