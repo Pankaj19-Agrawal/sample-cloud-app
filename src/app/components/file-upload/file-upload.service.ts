@@ -49,8 +49,8 @@ export class FileUploadService {
 
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
-		const filePath = `${timestamp + fileUpload.file.name}`;
-		// const filePath = `${fileUpload.file.name}`;
+		// const filePath = `${timestamp + fileUpload.file.name}`;
+		const filePath = `${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(

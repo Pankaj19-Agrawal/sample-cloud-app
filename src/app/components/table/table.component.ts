@@ -65,6 +65,14 @@ export class TableComponent implements AfterViewInit, OnInit {
     });
   }
 
+  probability(row:IfileContentJson){
+    if(row?.value[1] == 100.00){
+      return 100;
+    }else{
+      return row?.value[1];
+    }
+  }
+
 }
 
 
