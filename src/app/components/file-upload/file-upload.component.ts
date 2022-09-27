@@ -26,6 +26,7 @@ export class FileUploadComponent {
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
 	isLoading: boolean = false;
 	uploadedFileName: string;
+	@ViewChild('pdfview') pdfview: ElementRef;
 
 	constructor(
 		private fileUploadService: FileUploadService,
@@ -52,6 +53,7 @@ export class FileUploadComponent {
 	}
 
 	onUpload() {
+		// this.showPdf()
 		const file = this.selectedFiles?.item(0);
 		this.selectedFiles = undefined;
 		this.currentFileUpload = new FileUpload(file);
@@ -167,11 +169,64 @@ export class FileUploadComponent {
 			{
 				"modelPrediction": obj.category,
 				"actualPrediction": obj.newCategory,
-				"text": obj.value
+				"text": obj.value[0]
 			}
 		];
 		this.fileUploadService.replaceFileData(url, data).subscribe(res => {
 			console.log('res', res);
 		})
 	}
+
+
+	//pdf to text
+	// changeFile(file:any) {
+	// 	return new Promise((resolve, reject) => {
+	// 		const reader = new FileReader();
+	// 		reader.readAsDataURL(file);
+	// 		reader.onload = () => resolve(reader.result);
+	// 		reader.onerror = error => reject(error);
+	// 	});
+	// }
+	// fileBlob:any
+	// pdfContent:any
+	// b64:any
+	// onChange(event:any) {
+	// 	if (event.target.value) {
+	// 		const file = event.target.files[0];
+	// 		const type = file.type;
+	// 		this.changeFile(file).then((base64: any) => {
+	// 			console.log(base64);
+	// 			this.b64 = base64;
+	// 			// const blob = this.b64toBlob([base64], 'application/pdf')
+	// 			// console.log(blob)
+	// 			// https://stackblitz.com/edit/angular-ivy-qgcipz?file=src%2Fapp%2Fdata.ts,src%2Fapp%2Fapp.component.ts,src%2Fapp%2Fapp.component.html
+	// 		});
+	// 	} else alert('Nothing')
+	// }
+
+	// showPdf(){
+	// 	this.pdfContent =
+    //   URL.createObjectURL(this.b64toBlob(this.b64, 'application/pdf')) +
+    //   '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+	//   this.pdfview.nativeElement.setAttribute('data', this.pdfContent);
+	// }
+
+	// b64toBlob(b64Data:any, contentType:any) {
+	// 	var byteCharacters = atob(b64Data);
+	
+	// 	var byteArrays = [];
+	
+	// 	for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+	// 	  var slice = byteCharacters.slice(offset, offset + 512),
+	// 		byteNumbers = new Array(slice.length);
+	// 	  for (let i = 0; i < slice.length; i++) {
+	// 		byteNumbers[i] = slice.charCodeAt(i);
+	// 	  }
+	// 	  var byteArray = new Uint8Array(byteNumbers);
+	
+	// 	  byteArrays.push(byteArray);
+	// 	}
+	// 	var blob = new Blob(byteArrays, { type: contentType });
+	// 	return blob;
+	//   }
 }

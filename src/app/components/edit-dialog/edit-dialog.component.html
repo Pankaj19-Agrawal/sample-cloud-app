@@ -1,8 +1,18 @@
 <div mat-dialog-content>
-    <mat-form-field class="width-100">
+    <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Category</mat-label>
+        <mat-select (selectionChange)="getCategory($event)" [(ngModel)]="selectedCategory">
+          <mat-option *ngFor="let item of list" value="{{item}}"> {{item}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field appearance="outline" class="width-100">
+        <mat-label>Value</mat-label>
+        <textarea matInput matTextareaAutosize="false" [(ngModel)]="textAreaValue">{{data.value[0]}}</textarea>
+    </mat-form-field> -->
+    <!-- <mat-form-field class="width-100">
         <mat-label>Category</mat-label>
         <input matInput [(ngModel)]="category">
-    </mat-form-field>
+    </mat-form-field> -->
 </div>
 <div fxLayout="row">
     <div fxFlex class="dialog-buttons">

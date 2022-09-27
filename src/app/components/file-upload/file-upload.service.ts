@@ -49,7 +49,8 @@ export class FileUploadService {
 
 	pushFileToStorage(fileUpload: FileUpload) {
 		const timestamp = Date.now() + '_';
-		const filePath = `${timestamp + fileUpload.file.name}`;
+		// const filePath = `${timestamp + fileUpload.file.name}`;
+		const filePath = `${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(
@@ -83,6 +84,7 @@ export class FileUploadService {
 		return this.db.list(this.basePath, ref =>
 			ref.limitToLast(numberItems));
 	}
+	
 	deleteFile(fileUpload: FileUpload): void {
 		this.deleteFileDatabase(fileUpload.key)
 			.then(() => {

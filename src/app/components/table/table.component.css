@@ -17,10 +17,6 @@
   width: 100%;
 }
 
-/* .data-table td,
-.data-table th {
-  width: 25%;
-} */ 
 .data-table td:nth-of-type(3){
   width: 50%;
 }
@@ -37,6 +33,11 @@
   height: 400px;
   overflow-y: auto;
 }
+
 .value-column{
   width: 50%;
+}
+
+::ng-deep .mat-header-cell.text-center, .mat-cell.text-center{
+  text-align: center;
 }

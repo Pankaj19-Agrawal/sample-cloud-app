@@ -30,6 +30,9 @@ export class TableComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tableData.forEach((item:IfileContentJson)=>{
+      item.value[1] = item.value[1].toFixed(2);
+    });
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
@@ -47,7 +50,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   openDialog(row:IfileContentJson,index:number){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
-      data: row,
+      data: {row:row,allData:this.tableData}
     });
 
     dialogRef.afterClosed().subscribe(result => {
