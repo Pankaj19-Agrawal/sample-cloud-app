@@ -50,7 +50,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   openDialog(row:IfileContentJson,index:number){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
-      data: {row:row,allData:this.tableData}
+      data: {row:row,allData:this.tableData,mode:'edit'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -72,6 +72,34 @@ export class TableComponent implements AfterViewInit, OnInit {
     }else{
       return row?.value[1];
     }
+  }
+
+  addNewRow(result:any){
+    const row = {
+      category:result.newCategory,
+      value:[result.text]
+    }
+    this.tableData.push(row);
+    this.table.renderRows();
+  }
+
+  addRow(){
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: MessageConstant.DIALOG_WIDTH,
+      data: {allData:this.tableData,mode:'add'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);
+      if(result){
+        this.addNewRow(result);
+      }
+    });
+  }
+
+  removeRow(index:number){
+    this.tableData.splice(index, 1);
+    this.table.renderRows();
   }
 
 }

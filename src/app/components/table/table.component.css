@@ -41,3 +41,7 @@
 ::ng-deep .mat-header-cell.text-center, .mat-cell.text-center{
   text-align: center;
 }
+
+.text-center{
+  text-align: center;
+}

@@ -5,6 +5,11 @@
       <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
   </div>
+  <div fxFlex="5" class="text-center">
+    <button mat-icon-button aria-label="Add" (click)="addRow()">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </div>
 </div>
 
 <div fxLayout="row">
@@ -30,7 +35,7 @@
 
         <ng-container matColumnDef="value">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> <b>{{tableHeader.header3}}</b> </th>
-          <td mat-cell *matCellDef="let row" style="width: 20%;" class="text-center"> {{probability(row)}} </td>
+          <td mat-cell *matCellDef="let row" style="width: 10%;" class="text-center"> {{probability(row)}} </td>
         </ng-container>  
 
         <ng-container matColumnDef="action">
@@ -38,6 +43,9 @@
           <td mat-cell *matCellDef="let row; let i = index" class="edit-icon"> 
             <button mat-icon-button aria-label="Edit" (click)="openDialog(row,i)">
               <mat-icon>mode_edit</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Edit" (click)="removeRow(i)">
+              <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>

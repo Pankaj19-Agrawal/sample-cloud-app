@@ -17,6 +17,7 @@
 <div fxLayout="row">
     <div fxFlex class="dialog-buttons">
         <button mat-raised-button (click)="cancel()">{{dialogButton.cancel}}</button>
-        <button mat-raised-button class="update-button btn-color" (click)="update()" [disabled]="isDisabled()" cdkFocusInitial>{{dialogButton.ok}}</button>
+        <button *ngIf="data.mode ==='edit'" mat-raised-button class="update-button btn-color" (click)="update()" [disabled]="isDisabled()" cdkFocusInitial>{{dialogButton.ok}}</button>
+        <button *ngIf="data.mode ==='add'" mat-raised-button class="update-button btn-color" (click)="add()" [disabled]="isDisabled()" cdkFocusInitial>{{dialogButton.add}}</button>
     </div>
 </div>

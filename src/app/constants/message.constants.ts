@@ -8,7 +8,7 @@ export class MessageConstant{
     public static JSON_PROPERTIES = ['sno','category','probability','value','action'];
     public static FILE_NAME = {'name1':'Sample','default':'Document'};
     public static FILE_TYPE = {'type1':'.doc','default':'.doc'};
-    public static DIALOG_BUTTON = {'ok':'Update','cancel':'Cancel'};
+    public static DIALOG_BUTTON = {'ok':'Update','cancel':'Cancel','add':'Add'};
     public static DIALOG_WIDTH = '400px';
     public static TOAST_MESSAGE = {'success':'File Uploaded Successfully !','fail':'Error'};
     public static HEADER_IMG_PATH = '../assets/us-deloitte-logo.png';
