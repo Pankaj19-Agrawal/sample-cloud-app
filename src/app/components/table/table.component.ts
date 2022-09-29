@@ -57,7 +57,8 @@ export class TableComponent implements AfterViewInit, OnInit {
       console.log('The dialog was closed',result);
       if(result){
         row.category = result.newCategory;
-        this.dataSource.paginator = this.paginator;
+        row.value[0] = result.text;
+        // this.dataSource.paginator = this.paginator;
         // this.table.renderRows();
         result.index = index;
         this.onCategoryUpdate.emit(result);

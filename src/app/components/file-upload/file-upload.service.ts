@@ -106,6 +106,10 @@ export class FileUploadService {
 		return this.http.get(url);  
 	}
 
+	getResponseFileContentPDF(url:string) {
+		return this.http.get(url, { responseType: 'blob' });  
+	}
+
 	replaceFileData(url:string,data:any){
 		return this.http.post(url,data); 
 	}

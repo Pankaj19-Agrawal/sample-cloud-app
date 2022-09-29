@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { PdfViewerModule } from 'ng2-pdf-viewer'
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 import { AngularMaterialModule } from './material-module/material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,14 +40,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AngularFireModule.initializeApp(configuration.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    PdfViewerModule,
+    PdfJsViewerModule
   ],
-  providers: [
-    // { provide: USE_EMULATOR, useValue: ['localhost', 5001] },
-    // { provide: REGION, useValue: 'us-central1' },
-    // { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
-  //  { provide: ORIGIN, useValue: 'https://us-gcp-ame-its-gbhqe-sbx-1.web.app' }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
