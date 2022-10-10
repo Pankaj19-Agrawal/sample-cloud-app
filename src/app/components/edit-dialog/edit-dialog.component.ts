@@ -36,7 +36,7 @@ export class EditDialogComponent implements OnInit {
 
   isDisabled(){
     let area = document.getElementById('text') as HTMLTextAreaElement; 
-    if(area.value == ""){
+    if((this.selectedCategory == undefined) || (area.value == "")){
       return true;
     }else{
       return false;
@@ -71,9 +71,9 @@ export class EditDialogComponent implements OnInit {
     const obj = {
       category: this.data.row.category,
       newCategory: this.newCategory,
-      text: this.data.row.value
+      text: this.newText
     }
-    if(this.data.row.value !== this.textAreaValue) obj.text = this.textAreaValue
+    if(this.newText == undefined) obj.text = this.textAreaValue
     if(this.newCategory == undefined) obj.newCategory = this.data.row.category
     this.dialogRef.close(obj);
   }
