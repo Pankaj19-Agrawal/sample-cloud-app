@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+    <P>{{message}}</P>
+</div>
+<div fxLayout="row">
+    <div fxFlex class="dialog-buttons">
+        <button mat-raised-button mat-dialog-close>{{dialogButton.cancel}}</button>
+        <button mat-raised-button class="update-button btn-color" (click)="remove()" cdkFocusInitial>{{dialogButton.delete}}</button>
+    </div>
+</div>

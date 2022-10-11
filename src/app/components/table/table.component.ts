@@ -8,6 +8,7 @@ import { MessageConstant } from 'src/app/constants/message.constants';
 import { iHeader } from 'src/app/models/tableHeader.model';
 import { IfileContentJson } from 'src/app/models/fileContentJson.model';
 import { EditDialogComponent } from 'src/app/components/edit-dialog/edit-dialog.component';
+import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -54,12 +55,9 @@ export class TableComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
       if(result){
         row.category = result.newCategory;
         row.value[0] = result.text;
-        // this.dataSource.paginator = this.paginator;
-        // this.table.renderRows();
         result.index = index;
         this.onCategoryUpdate.emit(result);
       }
@@ -90,7 +88,6 @@ export class TableComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
       if(result){
         this.addNewRow(result);
       }
@@ -100,6 +97,18 @@ export class TableComponent implements AfterViewInit, OnInit {
   removeRow(index:number){
     this.tableData.splice(index, 1);
     this.table.renderRows();
+  }
+
+  openDeleteDialog(index:number){
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: MessageConstant.DIALOG_WIDTH
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.removeRow(index);
+      }
+    });
   }
 
 }

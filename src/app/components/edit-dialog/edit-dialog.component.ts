@@ -59,7 +59,7 @@ export class EditDialogComponent implements OnInit {
     if(index > -1){
       area.value = clipboardData.getData('text');
     }else{
-      this.commonService.openSnackBar(MessageConstant.DOCUMENT_TEXT_ONLY);
+      this.commonService.openConfirmationSnackBar(MessageConstant.DOCUMENT_TEXT_ONLY);
     }
   }
 

@@ -34,4 +34,12 @@ export class CommonService {
             panelClass: ['snackbar']
     	});
 	}
+
+    openConfirmationSnackBar(message:string) {
+		this.snackBar.open(message, 'OK', {
+      		horizontalPosition: this.horizontalPosition,
+      		verticalPosition: this.verticalPosition,
+            panelClass: ['snackbar']
+    	});
+	}
 }
