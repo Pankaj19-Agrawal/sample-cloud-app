@@ -26,7 +26,9 @@ export class FileUploadComponent {
 	downloadButton: string = MessageConstant.DOWNLOAD_DOCUMENT;
 	isLoading: boolean = false;
 	uploadedFileName: string;
-	doc:string
+	doc:string;
+	temp:any;
+	arr:any = [];
 
 	constructor(
 		private fileUploadService: FileUploadService,
@@ -53,7 +55,6 @@ export class FileUploadComponent {
 	}
 
 	onUpload() {
-		// this.showPdf()
 		const file = this.selectedFiles?.item(0);
 		this.selectedFiles = undefined;
 		this.currentFileUpload = new FileUpload(file);
@@ -96,7 +97,10 @@ export class FileUploadComponent {
 	
 	getResponseFileContent(url: string) {
 		this.fileUploadService.getResponseFileContent(url).subscribe((res:any) => {
+			// let dumy:any = {"Document Name": ["CO-PROMOTION AGREEMENT", 56.270022890113324, 100, 125],"Parties": ["Dova Pharmaceuticals, Inc., a Delaware corporation (\"Dova\"), and Valeant Pharmaceuticals North America LLC, a Delaware limited liability company (\"Valeant\"). Dova and Valeant are each referred to individually as a \"Party\" and together as the \"Parties\".", 22.275899822566956, 4849, 5104]}
+			// let result = Object.keys(dumy).map(key => ({ category: key, value: dumy[key] }));
 			let result = Object.keys(res).map(key => ({ category: key, value: res[key] }));
+			this.temp = result;
 			if (result.length) this.setTableData(result);
 		}); 
 	}
@@ -104,8 +108,64 @@ export class FileUploadComponent {
 	setTableData(data: IfileContentJson[]) {
 		this.isLoading = false;
 		this.tableData = data;
-		this.doc = "https://firebasestorage.googleapis.com/v0/b/cuad-test/o/test.pdf?alt=media&token=28c8c236-ab42-4d2b-a522-6daa8ba4f347";
-		this.getPlainFileContent();
+		this.getTextFileUrl();
+		// this.getPlainFileContent();
+	}
+
+	getTextFileUrl(){
+		let fileName = this.fileUploadService.getFileNameWithStamp();
+		fileName = fileName + UrlConstant.TEXT_FILE_SUFFIX;
+		this.storage.ref(fileName).getDownloadURL().subscribe((url: string) => {
+			this.getTextFileContent(url);
+		},
+		(error) => {
+			console.log('text file error',error);
+		});
+	}
+
+	getTextFileContent(url:string){
+		this.fileUploadService.getTextFileContent(url).subscribe(res=>{
+			let textArea: any = document.querySelector('textarea');
+			// this.temp.forEach((item:any, i: number)=>{
+			// 	const start = item.value[2]
+			// 	const end = item.value[3]
+			// 	const sub = res.substring(start,end);
+			// 	textArea.value = res.replace(sub,'<span style="background:yellow" id="' + item.category + i + '" title="' + item.category + '">' + sub + '</span>')
+			// });
+
+			//formated view
+			textArea.value = res;
+			//formated view
+
+			//paragraph view
+			// const lines = res.split(/\r\n|\n/);
+			// textArea.value = lines.join('');
+			//paragraph view
+
+			this.getPlainFileContent();
+			// console.log('textArea',textArea.value);
+			
+			let div: any = document.getElementById('div');
+			// res = JSON.stringify(res);
+			let newRes = res.replace(/[\n\r]/g," ");
+			let newRes2 = newRes.replace(/\s{2,}/g, " ");
+			this.fileUploadService.savePdfContent(newRes2);
+			div.innerHTML = newRes2
+			console.log('div',div.innerHTML);
+
+			// this.tableData.forEach((item: IfileContentJson, i: number) => {
+			// 	const val = JSON.parse(JSON.stringify(item.value[0]));
+			// 	div2.innerHTML = div2.innerHTML.replace(val, '<span style="background:yellow" id="' + item.category + i + '" title="' + item.category + '">' + val + '</span>')
+			// });
+
+			// let textArea: any = document.querySelector('textarea');
+			// const lines = res.split(/\r\n|\n/);
+			// textArea.value = lines.join('\n');
+			// console.log('res',textArea.value);
+			// // textArea.value = lines.join('');
+			// // textArea.value = res;
+			// this.getPlainFileContent();
+		});
 	}
 
 	loadPlainFile() {
@@ -142,7 +202,7 @@ export class FileUploadComponent {
 	convertPlainTextToHighlightedText(preElement: any) {
 		let contentJson = this.tableData;
 		contentJson.forEach((item: IfileContentJson, i: number) => {
-			preElement.innerHTML = preElement.innerHTML.replace(item.value[0], '<span style="background:yellow" id="' + item.category + i + '" title="' + item.category + '">' + item.value[0] + '</span>')
+			preElement.innerHTML = preElement.innerHTML.replace(item.value[0].trim(), '<span style="background:yellow" id="' + item.category + i + '" title="' + item.category + '">' + item.value[0].trim() + '</span>')
 		});
 	}
 
@@ -154,27 +214,42 @@ export class FileUploadComponent {
 	onCategoryUpdate(data: any) {
 		const index = data.index;
 		const newCategory = data.newCategory;
-		this.tableData[index].category = newCategory;
+		if(index) this.tableData[index].category = newCategory;
 		this.getPlainFileContent();
 
 		//one more thing need to do here
 		//need to upload json file in gcp bucket
 		//with value 
 		// {modelPrediction:'abc',actualPrediction:'xyz',value:'asdsdfsdsaf'}
-		this.saveActualPrediction(data);
+
+		//new code 
+		let obj = {
+			"modelPrediction": data.category,
+			"actualPrediction": data.newCategory,
+			"text": data.text
+		}
+
+		// console.log('res',res);
+		this.arr.push(obj);
+		//new code
 	}
 
-	saveActualPrediction(obj: any) {
-		const url = "https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2FactualPrediction.json?alt=media&token=953f1c78-267f-4930-bcbe-b1d4a9a9f243";
-		const data = [
-			{
-				"modelPrediction": obj.category,
-				"actualPrediction": obj.newCategory,
-				"text": obj.text
+	getUniqueArray(arr:any){
+		let result = arr.reduce((unique:any, o:any) => {
+			if(!unique.some((obj:any) => obj.modelPrediction === o.modelPrediction && obj.actualPrediction === o.actualPrediction && obj.text === o.text)) {
+			  unique.push(o);
 			}
-		];
-		this.fileUploadService.replaceFileData(url, data).subscribe(res => {
+			return unique;
+		},[]);
+		return result;
+	}
+
+	saveActualPrediction() {
+		let arr = this.getUniqueArray(this.arr)
+		const url = "https://firebasestorage.googleapis.com/v0/b/us-gcp-ame-its-gbhqe-sbx-1.appspot.com/o/uploads%2FactualPrediction.json?alt=media&token=953f1c78-267f-4930-bcbe-b1d4a9a9f243";
+		this.fileUploadService.replaceFileData(url, arr).subscribe(res => {
 			console.log('res', res);
-		})
+			this.arr = [];
+		});
 	}
 }

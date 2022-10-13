@@ -79,6 +79,7 @@ export class TableComponent implements AfterViewInit, OnInit {
     }
     this.tableData.push(row);
     this.table.renderRows();
+    this.onCategoryUpdate.emit(result);
   }
 
   addRow(){

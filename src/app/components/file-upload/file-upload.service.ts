@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 export class FileUploadService {
 	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;
 	fileNameWithStamp:string;
+	pdfContent:string;
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
@@ -106,8 +107,8 @@ export class FileUploadService {
 		return this.http.get(url);  
 	}
 
-	getResponseFileContentPDF(url:string) {
-		return this.http.get(url, { responseType: 'blob' });  
+	getTextFileContent(url:string) {
+		return this.http.get(url, { responseType: 'text' });  
 	}
 
 	replaceFileData(url:string,data:any){
@@ -116,5 +117,13 @@ export class FileUploadService {
 
 	updateJsonFileData(url:string,data:any){
 		return this.http.post(url,data); 
+	}
+
+	savePdfContent(content:string){
+		this.pdfContent = content;
+	}
+
+	getPdfContent(){
+		return this.pdfContent;
 	}
 }

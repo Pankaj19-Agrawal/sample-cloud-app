@@ -1,9 +1,12 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input #fileInput class="form-control" accept=".txt,.pdf" type="file" (change)="onChange($event)">
+			<input #fileInput class="form-control" accept=".pdf" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div> 
+		<!-- <div fxFlex="10">
+			<button mat-raised-button class="btn-color" (click)="saveActualPrediction()" [disabled]="arr.length<1">{{'Save'}}</button>
+		</div> -->
 	</div>
 </mat-card>
 <div fxLayout="row" fxLayoutAlign="space-around center" [ngClass]="{'loader':isLoading}">
@@ -18,7 +21,7 @@
 </mat-card>
 
 <textarea cols="50" rows="10" hidden>a</textarea>
-
+<div id="div" hidden></div>
 <div fxLayout="row" class="p-1 download-btn-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="text-right">
 		<button mat-raised-button class="btn-color" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
@@ -30,8 +33,3 @@
 		<pre id="pre-element"></pre>
 	</div>
 </div>
-
-<ng-container *ngIf="tableData">
-	<pdf-viewer [src]="doc" [render-text]="true" style="display: block; height: 100%;">
-	</pdf-viewer>
-</ng-container>

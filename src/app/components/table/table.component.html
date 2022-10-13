@@ -17,25 +17,25 @@
     <div class="table-container">
       <table mat-table [dataSource]="dataSource" matSort class="data-table">
         <ng-container matColumnDef="sno">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header0}}</b> </th>
-          <td mat-cell *matCellDef="let row; let i = index" style="width: 10%;"> {{i+1}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><b>{{tableHeader.header0}}</b></th>
+          <td mat-cell *matCellDef="let row; let i = index" style="width: 10%;">{{i+1}}</td>
         </ng-container>
 
         <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header1}}</b> </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><b>{{tableHeader.header1}}</b></th>
           <td mat-cell *matCellDef="let row; let i = index" style="width: 20%;"> 
             <a href="#{{row.category + i}}">{{row.category}}</a> 
           </td>
         </ng-container>
     
         <ng-container matColumnDef="probability">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{tableHeader.header2}}</b> </th>
-          <td mat-cell *matCellDef="let row" class="value-column"> {{row?.value[0]}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header><b>{{tableHeader.header2}}</b></th>
+          <td mat-cell *matCellDef="let row" class="value-column">{{row?.value[0]}}</td>
         </ng-container>
 
         <ng-container matColumnDef="value">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> <b>{{tableHeader.header3}}</b> </th>
-          <td mat-cell *matCellDef="let row" style="width: 10%;" class="text-center"> {{probability(row)}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"><b>{{tableHeader.header3}}</b></th>
+          <td mat-cell *matCellDef="let row" style="width: 10%;" class="text-center">{{probability(row)}}</td>
         </ng-container>  
 
         <ng-container matColumnDef="action">
