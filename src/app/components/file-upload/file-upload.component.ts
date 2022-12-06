@@ -248,6 +248,7 @@ export class FileUploadComponent {
 		const newFile = new FileUpload(file);
 		this.fileUploadService.uploadFileInRetrainBucket(newFile).then((res:any) => {
 			this.arr = [];
+			this.commonService.openSnackBar(MessageConstant.RETRAINING_SUCCESS);
 		});
 	}
 

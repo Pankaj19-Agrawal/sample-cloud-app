@@ -15,5 +15,6 @@ export class MessageConstant{
     public static INVALID_CREDENTIALS = 'Invalid Username/Password';
     public static DOCUMENT_TEXT_ONLY = 'Please select text from document only';
     public static DELETE_MESSAGE = 'Are you sure you want to delete?';
+    public static RETRAINING_SUCCESS = 'Saved Successfully !';
     
 }
