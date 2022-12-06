@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { catchError, delay, finalize, map, retryWhen, take } from 'rxjs/operators'
+import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs/operators'
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFireFunctions } from '@angular/fire/compat/functions';
 
 import { UrlConstant } from 'src/app/constants/url.constants';
 import { MessageConstant } from 'src/app/constants/message.constants';
 import { FileUpload } from 'src/app/models/fileUpload';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 
@@ -17,12 +14,14 @@ export class FileUploadService {
 	private basePath = UrlConstant.UPLOAD_FILE_CHILDPATH;
 	fileNameWithStamp:string;
 	pdfContent:string;
+	otherBucket:any;
 	constructor(
 		private http: HttpClient,
 		private db: AngularFireDatabase,
-		private storage: AngularFireStorage,
-		private fireFunction: AngularFireFunctions
-	) { }
+		private storage: AngularFireStorage
+	) {
+   		this.otherBucket = this.storage.storage.app.storage('cuad-retrain');
+	}
 
 	exportFile(doc:any) {
 		let fileName = MessageConstant.FILE_NAME.name1;
@@ -48,10 +47,15 @@ export class FileUploadService {
 		document.body.removeChild(downloadLink);
 	}
 
-	pushFileToStorage(fileUpload: FileUpload) {
+	uploadFileInRetrainBucket(file:any){
+		const storageRef = this.otherBucket.ref().child(file?.file?.name);
+		return storageRef.put(file.file);
+	}
+
+	pushFileToStorage(fileUpload: FileUpload, bucket: string) {
 		const timestamp = Date.now() + '_';
-		const filePath = `${timestamp + fileUpload.file.name}`;
-		// const filePath = `${fileUpload.file.name}`;
+		// const filePath = `${timestamp + fileUpload.file.name}`;
+		const filePath = `${fileUpload.file.name}`;
 		const storageRef = this.storage.ref(filePath);
 		const uploadTask = this.storage.upload(filePath, fileUpload.file);
 		uploadTask.snapshotChanges().pipe(

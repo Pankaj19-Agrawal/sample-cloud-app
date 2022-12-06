@@ -20,6 +20,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   tableHeader: iHeader = MessageConstant.TABLE_HEADER;
   displayedColumns: string[] = MessageConstant.JSON_PROPERTIES;
   dataSource: MatTableDataSource<IfileContentJson>;
+  copyOfTableData: IfileContentJson[];
   @Output() onCategoryUpdate: EventEmitter<IfileContentJson> = new EventEmitter<IfileContentJson>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,6 +32,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.copyOfTableData = JSON.parse(JSON.stringify(this.tableData));
     this.tableData.forEach((item:IfileContentJson)=>{
       item.value[1] = item.value[1].toFixed(2);
     });
@@ -51,7 +53,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   openDialog(row:IfileContentJson,index:number){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
-      data: {row:row,allData:this.tableData,mode:'edit'}
+      data: {row:row,allData:this.tableData,mode:'edit',copyOfTableData:this.copyOfTableData}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -85,7 +87,7 @@ export class TableComponent implements AfterViewInit, OnInit {
   addRow(){
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: MessageConstant.DIALOG_WIDTH,
-      data: {allData:this.tableData,mode:'add'}
+      data: {allData:this.tableData,mode:'add',copyOfTableData:this.copyOfTableData}
     });
 
     dialogRef.afterClosed().subscribe(result => {

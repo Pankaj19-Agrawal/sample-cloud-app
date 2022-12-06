@@ -4,9 +4,9 @@
 			<input #fileInput class="form-control" accept=".pdf" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div> 
-		<!-- <div fxFlex="10">
+		<div fxFlex="10">
 			<button mat-raised-button class="btn-color" (click)="saveActualPrediction()" [disabled]="arr.length<1">{{'Save'}}</button>
-		</div> -->
+		</div>
 	</div>
 </mat-card>
 <div fxLayout="row" fxLayoutAlign="space-around center" [ngClass]="{'loader':isLoading}">
