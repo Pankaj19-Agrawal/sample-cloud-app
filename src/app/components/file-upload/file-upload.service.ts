@@ -77,7 +77,7 @@ export class FileUploadService {
 
 	setFileUploadUrl(url:string){
 		const arr = url.split('/o/');
-		const newArr = arr[1].split('.pdf?')
+		const newArr = arr[1]?.replace('PDF?','pdf?')?.split('.pdf?')
 		this.fileNameWithStamp = newArr[0];
 	}
 
