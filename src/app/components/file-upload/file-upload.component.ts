@@ -17,7 +17,7 @@ export class FileUploadComponent {
 	@ViewChild('fileInput') fileInputVariable: ElementRef;
 	uploadButton: string = MessageConstant.UPLOAD_BUTTON;
 	file = null;
-	tableData: IfileContentJson[]
+	tableData: IfileContentJson[] = [];
 	selectedFiles: any;
 	currentFileUpload: FileUpload;
 	percentage: number;
@@ -54,6 +54,7 @@ export class FileUploadComponent {
 	}
 
 	onUpload() {
+		if(this.tableData) this.tableData = [];
 		const file = this.selectedFiles?.item(0);
 		this.selectedFiles = undefined;
 		this.currentFileUpload = new FileUpload(file);
@@ -63,6 +64,7 @@ export class FileUploadComponent {
 				if (this.percentage == 100) {
 					this.commonService.openSnackBar(MessageConstant.TOAST_MESSAGE.success);
 					this.reset();
+					this.fileUploadService.isDisableChooseFileButton(true);
 					this.isLoading = true;
 					setTimeout(()=>{this.getResponseFileUrl()},1000);
 				}
@@ -108,6 +110,7 @@ export class FileUploadComponent {
 
 	setTableData(data: IfileContentJson[]) {
 		this.isLoading = false;
+		this.fileUploadService.isDisableChooseFileButton(true);
 		this.tableData = data;
 		this.getTextFileUrl();
 		// this.getPlainFileContent();

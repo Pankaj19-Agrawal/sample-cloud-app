@@ -1,7 +1,7 @@
 <mat-card class="file-card">
 	<div fxLayout="row">
 		<div fxFlex>
-			<input #fileInput class="form-control" accept=".pdf" type="file" (change)="onChange($event)">
+			<input #fileInput id="inputTypeFile" class="form-control" accept=".pdf" type="file" (change)="onChange($event)">
 			<button mat-raised-button class="btn-color" (click)="onUpload()" [disabled]="!file">{{uploadButton}}</button>
 		</div> 
 		<div fxFlex="10">
@@ -12,7 +12,7 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" [ngClass]="{'loader':isLoading}">
 	<mat-spinner *ngIf="isLoading" diameter="50" strokeWidth="5"></mat-spinner>
 </div>
-<mat-card *ngIf="tableData" class="table-card">
+<mat-card *ngIf="tableData.length>0" class="table-card">
 	<div fxLayout="row">
 		<div fxFlex>
 			<app-table (onCategoryUpdate)="onCategoryUpdate($event)" [tableData]="tableData" *ngIf="tableData"></app-table>
@@ -22,13 +22,13 @@
 
 <textarea cols="50" rows="10" hidden>a</textarea>
 <div id="div" hidden></div>
-<div fxLayout="row" class="p-1 download-btn-div" [ngClass]="{'PreElementCss':isPreElementCss}">
+<div *ngIf="tableData.length>0" fxLayout="row" class="p-1 download-btn-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="text-right">
 		<button mat-raised-button class="btn-color" *ngIf="tableData" (click)="downloadFile()">{{downloadButton}}</button>
 	</div>
 </div>
 
-<div fxLayout="row" class="document-div" [ngClass]="{'PreElementCss':isPreElementCss}">
+<div *ngIf="tableData.length>0" fxLayout="row" class="document-div" [ngClass]="{'PreElementCss':isPreElementCss}">
 	<div fxFlex class="scrolling-enable">
 		<pre id="pre-element"></pre>
 	</div>

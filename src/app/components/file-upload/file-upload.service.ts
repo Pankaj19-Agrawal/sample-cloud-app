@@ -130,4 +130,9 @@ export class FileUploadService {
 	getPdfContent(){
 		return this.pdfContent;
 	}
+
+	isDisableChooseFileButton(value:boolean){
+		let inputTypeFile:any = document.getElementById("inputTypeFile") as HTMLInputElement;
+		inputTypeFile.disabled = value;
+	}
 }
