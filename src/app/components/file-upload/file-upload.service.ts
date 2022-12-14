@@ -135,4 +135,9 @@ export class FileUploadService {
 		let inputTypeFile:any = document.getElementById("inputTypeFile") as HTMLInputElement;
 		inputTypeFile.disabled = value;
 	}
+
+	filterFileName(name:string){
+		const fileName = name.replace(/%20/g," ").replace(/%2C/g,",").replace(/%5B/g,"[").replace(/%5D/g,"]");
+		return fileName;
+	}
 }

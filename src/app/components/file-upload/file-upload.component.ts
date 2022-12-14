@@ -85,6 +85,7 @@ export class FileUploadComponent {
 	getResponseFileUrl() {
 		let fileName = this.fileUploadService.getFileNameWithStamp();
 		fileName = fileName + UrlConstant.FILENAME_SUFFIX;
+		fileName = this.fileUploadService.filterFileName(fileName);
 		this.storage.ref(fileName).getDownloadURL().subscribe((url: string) => {
 			this.getResponseFileContent(url);
 		},
@@ -110,7 +111,7 @@ export class FileUploadComponent {
 
 	setTableData(data: IfileContentJson[]) {
 		this.isLoading = false;
-		this.fileUploadService.isDisableChooseFileButton(true);
+		this.fileUploadService.isDisableChooseFileButton(false);
 		this.tableData = data;
 		this.getTextFileUrl();
 		// this.getPlainFileContent();
@@ -119,6 +120,7 @@ export class FileUploadComponent {
 	getTextFileUrl(){
 		let fileName = this.fileUploadService.getFileNameWithStamp();
 		fileName = fileName + UrlConstant.TEXT_FILE_SUFFIX;
+		fileName = this.fileUploadService.filterFileName(fileName);
 		this.storage.ref(fileName).getDownloadURL().subscribe((url: string) => {
 			this.getTextFileContent(url);
 		},
