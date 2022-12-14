@@ -41,8 +41,23 @@ export class FileUploadComponent {
 		this.file = event.target;
 		this.selectedFiles = event.target.files;
 		this.uploadedFileName = this.selectedFiles[0].name;
+		const bool = this.checkFileName();
+		if(!bool) return false;
 		this.uploadedFileName.substring(0, this.uploadedFileName.length - 4)
 		this.checkFileType(this.selectedFiles[0].type);
+	}
+
+	checkFileName(){
+		const invalidCharacters = MessageConstant.INVALID_CHARACTERS;
+		for (let l = 0; l < invalidCharacters.length; l++) {
+			if (this.uploadedFileName.indexOf(invalidCharacters[l]) > -1) {
+				alert(MessageConstant.FILENAME_VALIDATION);
+				this.file = null;
+				this.reset();
+				return false;
+			}
+		}
+		return true;
 	}
 
 	checkFileType(fileType:string){

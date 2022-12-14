@@ -16,5 +16,6 @@ export class MessageConstant{
     public static DOCUMENT_TEXT_ONLY = 'Please select text from document only';
     public static DELETE_MESSAGE = 'Are you sure you want to delete?';
     public static RETRAINING_SUCCESS = 'Saved Successfully !';
-    
+    public static INVALID_CHARACTERS = ['`','~','!','@','#','$','%','^','&','*','{','}','|','?','<','>','/'];
+    public static FILENAME_VALIDATION = 'File Name Should Not Contain These Special Characters  `, ~, !, @, #, $, %, ^, &, *, {, }, |, ?, <, >, /';
 }
